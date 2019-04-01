@@ -1,0 +1,41 @@
+.container-fluid{
+
+  background-position: 0px 179px;
+  background-repeat: no-repeat;
+  width: 100%;
+  background-image: url(/assets/img/308.png);
+
+  height: 100%;
+  padding-top: 100px;
+  background-attachment: fixed;
+    background-size: cover;
+  text-align: center;
+
+}
+.container{
+
+  //background-color: #ffffffab;
+  height: 100%;
+  border-radius: 8px;
+  padding-bottom: 30px;
+}
+mat-card{
+  margin: 20px;
+  padding: 30px;
+  height: 150px;
+
+}
+.cards{
+
+  width: 80%;
+  margin: 20px auto;
+}
+mat-card:hover{
+  background-color: #2196F3;
+  color: white;
+  cursor: pointer;
+}
+.row{
+  margin: 0px;
+  padding: 0px;
+}
