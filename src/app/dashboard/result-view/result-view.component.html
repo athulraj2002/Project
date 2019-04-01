@@ -1,0 +1,148 @@
+<div class="container-fluid">
+  <div class="container">
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Analysis">
+          <div class="cards">
+            <div class="row">
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 1 </mat-card>
+              </div>
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 2 </mat-card>
+              </div>
+              <div class="col-md-4">
+                        <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 3 </mat-card>
+              </div>
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 1 </mat-card>
+              </div>
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 2 </mat-card>
+              </div>
+              <div class="col-md-4">
+                        <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 3 </mat-card>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+        </mat-tab>
+        <mat-tab label="Academics">
+          <div class="cards">
+            <div class="row">
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
+              </div>
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
+              </div>
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
+              </div>
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
+              </div>
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
+              </div>
+              <div class="col-md-4">
+                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </mat-tab>
+
+        </mat-tab-group>
+  </div>
+
+</div>
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Analysis Made</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div mdbModal #basicModal1="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal1.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Academic result on Date</h4>
+      </div>
+      <div class="modal-body">
+
+        <mat-tab-group mat-align-tabs="center">
+          <mat-tab label="Overview">
+              <div class="row pt-5">
+                <div class="col-md-6 pt-5">
+                    <h1>Table containing marks</h1>
+                </div>
+                <div class="col-md-6 pt-5">
+                  <div>
+                    <div>
+                      <div style="display: block">
+                        <canvas baseChart
+                          [datasets]="barChartData"
+                          [labels]="barChartLabels"
+                          [options]="barChartOptions"
+                          [plugins]="barChartPlugins"
+                          [legend]="barChartLegend"
+                            [colors]="colors"
+                          [chartType]="barChartType">
+                        </canvas>
+                      </div>
+
+                    </div>
+                    </div>
+                </div>
+
+              </div>
+
+
+          </mat-tab>
+          <mat-tab label="Analysis">
+              <div class="">
+                <h3>Analysis Made</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                   dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                   ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                   fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit anim id est laborum.</p>
+
+              </div>
+
+
+
+          </mat-tab>
+
+        </mat-tab-group>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal1.hide()" mdbWavesEffect>Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+.container-fluid{
+  text-align: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: 0px 179px;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-image: url(/assets/img/308.png);
+}
+
+.jumbotron{
+  background: none;
+  box-shadow: none;
+  font-size: 6vw;
+}
+button{
+  margin-top:30px;
+  border: 0px;
+  color: white;
+  padding: 25px;
+  width: 300px;
+  font-size: 300px;
+}
+button:hover{
+  color: white;
+}
