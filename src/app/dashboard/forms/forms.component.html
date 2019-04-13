@@ -5,15 +5,54 @@
             <form [formGroup]="firstFormGroup">
                 <ng-template matStepLabel>Personal Details</ng-template>
                 <div class="jumbotron center">
+
+
+                    <mat-radio-group id="genderad">
+                      <mat-radio-button value="1">Male</mat-radio-button>
+                      <mat-radio-button value="2">Female</mat-radio-button>
+                    </mat-radio-group><br>
+                      <mat-form-field style="width:60%;margin-right:10px;">
+                       <span matPrefix>+91 &nbsp;</span>
+                       <input type="tel" matInput placeholder="Mobile Number" required>
+                     </mat-form-field>
+                     <mat-form-field style="width:60px;">
+                         <input type="text"  matInput placeholder="Age" formControlName="firstCtrl" maxlength="2" size="2" required>
+                     </mat-form-field><br>
+                     <mat-form-field>
+                        <textarea matInput placeholder="Address" required></textarea>
+                      </mat-form-field><br>
+                      <mat-form-field>
+                          <mat-label>Father's Occupation</mat-label>
+                          <mat-select>
+                            <mat-option *ngFor="let jobs of Jobs1" [value]="jobs.value">
+                              {{jobs.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      <br>
+                      <mat-form-field>
+                          <mat-label>Mother's Occupation</mat-label>
+                          <mat-select>
+                            <mat-option *ngFor="let jobs of Jobs2" [value]="jobs.value">
+                              {{jobs.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      <br>
+                      <mat-radio-group>
+                        <mat-radio-button value="1">Day Scholar</mat-radio-button>
+                        <mat-radio-button value="2">Hosteler</mat-radio-button>
+                      </mat-radio-group><br>
                   <mat-form-field>
-                      <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                      <input matInput placeholder="No of Backlog" formControlName="firstCtrl" required>
                   </mat-form-field><br>
                   <mat-form-field>
-                      <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                      <input matInput placeholder="Batch" formControlName="firstCtrl" required>
                   </mat-form-field><br>
                   <mat-form-field>
-                      <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                      <input matInput placeholder="Current Semester" formControlName="firstCtrl" required>
                   </mat-form-field>
+
                   <div>
                       <button mat-button matStepperNext class="btn btn-primary">Next</button>
                   </div>

@@ -1,19 +1,24 @@
-
+html,body{
+  background-color: #212529;
+  height: 100%;
+  width: 100%;
+}
 .container{
   padding-top: 100px;
   width: 40%;
-background-color: #ooooooff;
+  background-color: #212529;;
 }
 .center{
   text-align: center;
 }
 .background{
   width: 100%;
-  height: 100vh;
-      background-image: url(/assets/img/308.png);
-      background-size: cover;
-      background-position: 0px 179px;
-      background-repeat: no-repeat;
+  height: 100%;
+      //background-image: url(/assets/img/308.png);
+        background-color: #212529;
+    //  background-size: cover;
+    //  background-position: 0px 179px;
+    //  background-repeat: no-repeat;
 }
 .mat-stepper-horizontal{
   background-color: #00000000 !important;
@@ -24,4 +29,19 @@ button{
 }
 .jumbotron{
   background-color: #ffffffd1;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.mat-radio-button ~ .mat-radio-button:active {
+  background-color: blue;
+}
+
+
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  border-color: blue;
+}
+mat-form-field{
+  width: 75%;
 }

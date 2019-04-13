@@ -23,7 +23,7 @@
 
 <!--modal signup start-->
   <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
+    aria-labelledby="myModalLabel" aria-hidden="true"  >
     <div class="modal-dialog form-dark" role="document">
       <!--Content-->
       <div class="modal-content card card-image" >
@@ -41,52 +41,58 @@
             </button>
           </div>
           <!--Body-->
-          <div class="modal-body">
+          <div class="modal-body" [formGroup]="signupform">
             <!--Body-->
-            <div class="md-form mb-5">
+
+            <div class="md-form mb-5"  >
               <i class="fas fa-id-badge prefix white-text"></i>
-              <input type="email" id="Form-text5" class="form-control white-text" mdbInput
-                [formControl]="">
+              <input type="text" id="Form-text5" class="form-control white-text" mdbInput
+                formControlName="uniregno">
               <label data-error="wrong" data-success="right" for="Form-text5">Univ. Reg. No</label>
             </div>
             <div class="md-form mb-5">
+              <i class="fas fa-id-badge prefix white-text"></i>
+              <input type="text" id="Form-text6" class="form-control white-text" mdbInput
+                formControlName="adno">
+              <label data-error="wrong" data-success="right" for="Form-text6">Admission No.</label>
+            </div>
+            <div class="md-form mb-5">
               <i class="fas fa-user prefix white-text"></i>
-              <input type="email" id="Form-text5" class="form-control white-text" mdbInput
-                [formControl]="">
-              <label data-error="wrong" data-success="right" for="Form-text5">Name</label>
+              <input type="text" id="Form-text7" class="form-control white-text" mdbInput
+                formControlName="uname">
+              <label data-error="wrong" data-success="right" for="Form-text7">Name</label>
             </div>
             <div class="md-form mb-5">
               <i class="fas fa-envelope prefix white-text"></i>
-              <input type="email" id="Form-email5" class="form-control white-text" mdbInput
-                [formControl]="modalFormDarkEmail">
-              <label data-error="wrong" data-success="right" for="Form-email5">Your email</label>
+              <input type="email" id="Form-email6" class="form-control white-text" mdbInput
+                formControlName="mailId">
+              <label data-error="wrong" data-success="right" for="Form-email6">Your email</label>
             </div>
 
             <div class="md-form pb-3">
               <i class="fas fa-lock prefix white-text"></i>
-              <input type="password" id="Form-pass5" class="form-control white-text" mdbInput
-                [formControl]="modalFormDarkPassword">
+              <input type="password" id="Form-pass5" class="form-control white-text" mdbInput showHideInput
+                formControlName="passwd1">
+                <i
+                  class="material-icons "
+                  showHideTrigger="Form-pass5"
+                  [showHideStatus]="{ materialIcon: true, id: 'Form-pass5' }"
+                ></i>
               <label data-error="wrong" data-success="right" for="Form-pass5">Enter password</label>
+                <div class="form-group mt-4">
             </div>
 
-            <div class="md-form pb-3">
-              <i class="fas fa-lock prefix white-text"></i>
-              <input type="password" id="Form-pass6" class="form-control white-text" mdbInput
-                [formControl]="modalFormDarkPassword">
-              <label data-error="wrong" data-success="right" for="Form-pass6">Re-enter password</label>
-              <div class="form-group mt-4">
 
-              </div>
-            </div>
 
             <!--Grid row-->
             <div class="row d-flex align-items-center mb-4">
 
               <!--Grid column-->
               <div class="text-center mb-3 col-md-12">
-                <button type="button" mdbBtn color="success" block="true"  class="z-depth-1 waves-light signupbtn"
+                <button type="submit"  [disabled]="!signupform.valid" (click)="onSignup();" mdbBtn color="success" block="true"  class="z-depth-1 waves-light signupbtn"
                   mdbWavesEffect>Sign up</button>
               </div>
+
               <!--Grid column-->
 
             </div>
@@ -112,6 +118,7 @@
       <!--/.Content-->
     </div>
   </div>
+  </div>
 
 
 
@@ -135,13 +142,13 @@
               </button>
             </div>
             <!--Body-->
-            <div class="modal-body">
+            <div class="modal-body" [formGroup]="loginform">
               <!--Body-->
 
-              <div class="md-form mb-5">
+              <div class="md-form mb-5" >
                 <i class="fas fa-envelope prefix white-text"></i>
                 <input type="email" id="Form-email5" class="form-control white-text" mdbInput
-                  [formControl]="modalFormDarkEmail">
+                  formControlName="emailLogin">
                 <label data-error="wrong" data-success="right" for="Form-email5">Enter email</label>
               </div>
 
@@ -150,7 +157,7 @@
               <div class="md-form pb-3">
                 <i class="fas fa-lock prefix white-text"></i>
                 <input type="password" id="Form-pass6" class="form-control white-text" mdbInput
-                  [formControl]="modalFormDarkPassword">
+                  formControlName="passwdLogin">
                 <label data-error="wrong" data-success="right" for="Form-pass6">Enter password</label>
                 <div class="form-group mt-4">
 
@@ -162,7 +169,7 @@
 
                 <!--Grid column-->
                 <div class="text-center mb-3 col-md-12">
-                  <button type="button" mdbBtn color="success" routerLink="/dashboard" block="true"  class="z-depth-1 waves-light signupbtn"
+                  <button type="button" mdbBtn color="success" [disabled]="!loginform.valid" (click)="onSignin();" block="true"  class="z-depth-1 waves-light signupbtn"
                     mdbWavesEffect>Login</button>
                 </div>
                 <!--Grid column-->

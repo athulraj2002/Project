@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators,ReactiveFormsModule,FormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
 
+export interface jobs {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-forms',
@@ -9,10 +15,26 @@ import {MatStepperModule} from '@angular/material/stepper';
   styleUrls: ['./forms.component.scss'],
 
 })
+
+
 export class FormsComponent implements OnInit {
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+
+  Jobs1: jobs[] = [
+   {value: 'gvt', viewValue: 'Government Job'},
+   {value: 'pvt', viewValue: 'Private Job'},
+   {value: 'abroad', viewValue: 'Abroad'},
+   {value: 'other', viewValue: 'Other'}
+ ];
+ Jobs2: jobs[] = [
+  {value: 'gvt', viewValue: 'Government Job'},
+  {value: 'pvt', viewValue: 'Private Job'},
+  {value: 'abroad', viewValue: 'Abroad'},
+  {value: 'hm', viewValue: 'Home Maker'},
+  {value: 'other', viewValue: 'Other'}
+];
 
   constructor(private _formBuilder: FormBuilder) {}
 
