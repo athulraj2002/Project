@@ -14,42 +14,65 @@ export class HomepageComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{     ticks: {
+    scales: { xAxes: [{ticks:{
+        fontColor:'white'
+    }}], yAxes: [{     ticks: {
           max : 100,
           min : 0,
+          fontColor: 'white'
+
         }}] },
     plugins: {
       datalabels: {
         anchor: 'end',
-        align: 'end',
-      }
-    }
+        align: 'end'
 
-  };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+      }
+    },
+    legend: {
+  display: true,
+  labels: {
+    fontColor: 'white' // legend color (can be hexadecimal too)
+  },
+}
+
+};
+  public barChartLabels: Label[] = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Marks' }
+    { data: [65, 59, 80, 81, 56, 55], label: 'Marks' }
   ];
 
     public lineChartOptions: ChartOptions = {
       responsive: true,
       // We use these empty structures as placeholders for dynamic theming.
-      scales: { xAxes: [{}], yAxes: [{     ticks: {
+      scales: { xAxes: [{ticks:{
+          fontColor:'white'
+      }}], yAxes: [{     ticks: {
             max : 100,
             min : 0,
+            fontColor: 'white'
+
           }}] },
       plugins: {
         datalabels: {
           anchor: 'end',
-          align: 'end',
-        }
-      }
+          align: 'end'
 
-    };
+        }
+      },
+      legend: {
+    display: true,
+    labels: {
+      fontColor: 'white' // legend color (can be hexadecimal too)
+    },
+  }
+
+};
+
     public lineChartLabels: Label[] = ['s1', 's2', 's3', 's4', 's5', 's6', 's7','s8'];
     public lineChartType: ChartType = 'line';
     public lineChartLegend = true;
@@ -61,9 +84,21 @@ export class HomepageComponent implements OnInit {
     colors = [
 
     { // 2nd Year.
-      backgroundColor: 'rgba(30, 169, 224, 0.8)'
+     backgroundColor: 'rgba(30, 169, 224, 0.8)',
+     borderColor: 'rgba(225,10,24,0.2)',
+       pointBackgroundColor: 'rgba(225,10,24,0.2)',
+       pointBorderColor: '#fff',
+       pointHoverBackgroundColor: '#fff',
+       pointHoverBorderColor: 'rgba(225,10,24,0.2)',
+
     }
   ]
+
+
+  public barChartLabels2: Label[] = ['s1', 's2', 's3', 's4', 's5', 's6', 's7','s8'];
+  public barChartData2: ChartDataSets[] = [
+    { data: [65, 59, 80, 81, 56, 55, 40,78], label: 'percentage' }
+  ];
   constructor() { }
 
   ngOnInit() {

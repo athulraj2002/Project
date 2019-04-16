@@ -2,12 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormControl, Validators,ReactiveFormsModule } from '@angular/forms';
-
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import {AuthService} from './home/auth.service';
+import {AuthGuard} from './home/auth-guard.service';
 import * as $ from 'jquery';
 
+import {HttpModule} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MatStepperModule, MatInputModule, MatButtonModule, MatAutocompleteModule } from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ParticlesComponent } from './particles/particles.component';
@@ -23,7 +26,9 @@ import { HomepageComponent } from './dashboard/homepage/homepage.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
    import { ChartsModule } from 'ng2-charts';
+   import {MatRadioModule} from '@angular/material/radio';
    import {MatCardModule} from '@angular/material/card';
+   import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -52,10 +57,15 @@ import {MatTableModule} from '@angular/material/table';
         BrowserAnimationsModule,
         MatTabsModule,
         MatTableModule,
+        MatRadioModule,
         ChartsModule,
-        MatCardModule
+        MatCardModule,
+        ShowHidePasswordModule,
+        HttpModule,
+        HttpClientModule,
+        MatSelectModule
   ],
-  providers: [],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
 })

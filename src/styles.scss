@@ -1,2 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.mat-tab-label-content {
+  color: white !important;
+}
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header .mat-step-label{
+  color: white !important;
+}
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container{
+    color: white !important;
+}
+
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color: blue !important;
+}
+
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-inner-circle{
+  background-color: blue !important;
+}

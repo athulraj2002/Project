@@ -8,7 +8,21 @@
 
         <mat-tab-group mat-align-tabs="center">
             <mat-tab label="Personal Info">
+                <div class="row">
+                  <div class="col-md-6" style="text-align:left;">
+                    <h6>name:<span class="tab1">sasi</span></h6>
 
+                    <h6>adm no:150xxx</h6>
+                    <h6>univ reg no:SCT15CSxxx</h6>
+                    <h6>year:2015-2019</h6>
+                    <h6>department:CSE</h6>
+
+                  </div>
+                  <div class="col-md-6">
+                    <h6>address</h6>
+                    <h6>contact no</h6>
+                  </div>
+                </div>
 
             </mat-tab>
             <mat-tab label="Academic Info">
@@ -19,7 +33,19 @@
 
             </mat-tab>
             <mat-tab label="Personality Info">
-
+                <div class="row">
+                  <div class="col-md-4">
+                    <h2>INTJ</h2>
+                    <img src="assets/img/intj-architect.svg" alt="">
+                  </div>
+                  <div class="col-md-8">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  </div>
+                </div>
 
             </mat-tab>
             </mat-tab-group>
@@ -55,14 +81,14 @@
             <div>
               <div style="display: block">
                 <canvas baseChart
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [plugins]="lineChartPlugins"
-                  [legend]="lineChartLegend"
+                  [datasets]="barChartData2"
+                  [labels]="barChartLabels2"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [legend]="barChartLegend"
                     [colors]="colors"
 
-                  [chartType]="lineChartType">
+                  [chartType]="barChartType">
                 </canvas>
               </div>
 
