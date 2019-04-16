@@ -35,7 +35,12 @@ export class ResultViewComponent implements OnInit {
   public barChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Marks' }
   ];
+  colors = [
 
+  { // 2nd Year.
+    backgroundColor: 'rgba(30, 169, 224, 0.8)'
+  }
+  ]
   constructor() { }
 
   ngOnInit() {
