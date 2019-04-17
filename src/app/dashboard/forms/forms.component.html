@@ -1,6 +1,7 @@
 <div class="background">
   <div class="container">
     <mat-horizontal-stepper labelPosition="bottom" #stepper>
+
         <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
                 <ng-template matStepLabel>Personal Details</ng-template>
@@ -63,11 +64,102 @@
         </mat-step>
         <mat-step [stepControl]="secondFormGroup">
             <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Academic Details</ng-template>
+                <ng-template matStepLabel>Personality 1</ng-template>
                 <div class="jumbotron center">
-                  <mat-form-field>
-                      <input matInput placeholder="Address" formControlName="secondCtrl" required>
-                  </mat-form-field>
+                  <p> * 1.Strongly Agree &nbsp; 5.Strongly Disagree</p>
+                    <!-- 1-->
+                  <label id="example-radio-group-label">Am the life of the party.</label><br>
+                      <mat-radio-group
+                        class="example-radio-group">
+                        <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                          {{season}}
+                        </mat-radio-button><br>
+                      </mat-radio-group>
+
+                      <!-- 2-->
+                      <label id="example-radio-group-label">Don't talk a lot.</label><br>
+                          <mat-radio-group
+                            class="example-radio-group">
+                            <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                              {{season}}
+                            </mat-radio-button><br>
+                          </mat-radio-group>
+
+                          <!-- 3-->
+                          <label id="example-radio-group-label">Feel comfortable around people  </label><br>
+                              <mat-radio-group
+                                class="example-radio-group">
+                                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                  {{season}}
+                                </mat-radio-button><br>
+                              </mat-radio-group>
+                              <!-- 3-->
+                              <label id="example-radio-group-label">Keep in the background. </label><br>
+                                  <mat-radio-group
+                                    class="example-radio-group">
+                                    <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                      {{season}}
+                                    </mat-radio-button><br>
+                                  </mat-radio-group>
+                                    <!-- 4-->
+                                  <label id="example-radio-group-label">Start conversations. </label><br>
+                                      <mat-radio-group
+                                        class="example-radio-group">
+                                        <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                          {{season}}
+                                        </mat-radio-button><br>
+                                      </mat-radio-group>
+
+                                      <!-- 5-->
+                                    <label id="example-radio-group-label"> Have little to say.  </label><br>
+                                        <mat-radio-group
+                                          class="example-radio-group">
+                                          <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                            {{season}}
+                                          </mat-radio-button><br>
+                                        </mat-radio-group>
+                                        <!-- 6-->
+                                      <label id="example-radio-group-label">Talk to a lot of different people at parties.  </label><br>
+                                          <mat-radio-group
+                                            class="example-radio-group">
+                                            <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                              {{season}}
+                                            </mat-radio-button><br>
+                                          </mat-radio-group>
+                                          <!-- 7-->
+                                        <label id="example-radio-group-label">Don't like to draw attention to myself </label><br>
+                                            <mat-radio-group
+                                              class="example-radio-group">
+                                              <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                {{season}}
+                                              </mat-radio-button><br>
+                                            </mat-radio-group>
+                                            <!-- 7-->
+                                          <label id="example-radio-group-label">Don't mind being the center of attention. </label><br>
+                                              <mat-radio-group
+                                                class="example-radio-group">
+                                                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                  {{season}}
+                                                </mat-radio-button><br>
+                                              </mat-radio-group>
+                                              <!-- 7-->
+                                            <label id="example-radio-group-label">Am quiet around strangers. </label><br>
+                                                <mat-radio-group
+                                                  class="example-radio-group">
+                                                  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                    {{season}}
+                                                  </mat-radio-button><br>
+                                                </mat-radio-group>
+                                                <!-- 7-->
+                                              <label id="example-radio-group-label">Feel little concern for others. </label><br>
+                                                  <mat-radio-group
+                                                    class="example-radio-group">
+                                                    <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                      {{season}}
+                                                    </mat-radio-button><br>
+                                                  </mat-radio-group>
+
+
                   <div>
                       <button mat-button matStepperPrevious class="btn btn-info">Back</button>
                       <button mat-button matStepperNext class="btn btn-primary">Next</button>
@@ -76,6 +168,322 @@
 
             </form>
         </mat-step>
+
+        <mat-step [stepControl]="thirdFormGroup">
+            <form [formGroup]="thirdFormGroup">
+                <ng-template matStepLabel>Personality 2</ng-template>
+                <div class="jumbotron center">
+
+                  <!-- 1-->
+                <label id="example-radio-group-label">Am interested in people.</label><br>
+                    <mat-radio-group
+                      class="example-radio-group">
+                      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                        {{season}}
+                      </mat-radio-button><br>
+                    </mat-radio-group>
+
+                    <!-- 2-->
+                    <label id="example-radio-group-label">Insult people.  </label><br>
+                        <mat-radio-group
+                          class="example-radio-group">
+                          <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                            {{season}}
+                          </mat-radio-button><br>
+                        </mat-radio-group>
+
+                        <!-- 3-->
+                        <label id="example-radio-group-label">Sympathize with others' feelings  </label><br>
+                            <mat-radio-group
+                              class="example-radio-group">
+                              <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                {{season}}
+                              </mat-radio-button><br>
+                            </mat-radio-group>
+                            <!-- 3-->
+                            <label id="example-radio-group-label">Am not interested in other people's problems.</label><br>
+                                <mat-radio-group
+                                  class="example-radio-group">
+                                  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                    {{season}}
+                                  </mat-radio-button><br>
+                                </mat-radio-group>
+                                  <!-- 4-->
+                                <label id="example-radio-group-label">Have a soft heart  </label><br>
+                                    <mat-radio-group
+                                      class="example-radio-group">
+                                      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                        {{season}}
+                                      </mat-radio-button><br>
+                                    </mat-radio-group>
+
+                                    <!-- 5-->
+                                  <label id="example-radio-group-label"> Am not really interested in others. </label><br>
+                                      <mat-radio-group
+                                        class="example-radio-group">
+                                        <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                          {{season}}
+                                        </mat-radio-button><br>
+                                      </mat-radio-group>
+                                      <!-- 6-->
+                                    <label id="example-radio-group-label">Take time out for others. </label><br>
+                                        <mat-radio-group
+                                          class="example-radio-group">
+                                          <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                            {{season}}
+                                          </mat-radio-button><br>
+                                        </mat-radio-group>
+                                        <!-- 7-->
+                                      <label id="example-radio-group-label">Feel others' emotions.  </label><br>
+                                          <mat-radio-group
+                                            class="example-radio-group">
+                                            <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                              {{season}}
+                                            </mat-radio-button><br>
+                                          </mat-radio-group>
+                                          <!-- 7-->
+                                        <label id="example-radio-group-label">Make people feel at ease </label><br>
+                                            <mat-radio-group
+                                              class="example-radio-group">
+                                              <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                {{season}}
+                                              </mat-radio-button><br>
+                                            </mat-radio-group>
+                                            <!-- 7-->
+                                          <label id="example-radio-group-label">Am always prepared. </label><br>
+                                              <mat-radio-group
+                                                class="example-radio-group">
+                                                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                  {{season}}
+                                                </mat-radio-button><br>
+                                              </mat-radio-group>
+                                              <!-- 7-->
+                                            <label id="example-radio-group-label">Leave my belongings around. </label><br>
+                                                <mat-radio-group
+                                                  class="example-radio-group">
+                                                  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                    {{season}}
+                                                  </mat-radio-button><br>
+                                                </mat-radio-group>
+                  <div>
+                      <button mat-button matStepperPrevious class="btn btn-info">Back</button>
+                      <button mat-button matStepperNext class="btn btn-primary">Next</button>
+                  </div>
+                </div>
+
+            </form>
+        </mat-step>
+
+
+        <mat-step [stepControl]="fourthFormGroup">
+            <form [formGroup]="fourthFormGroup">
+                <ng-template matStepLabel>Personality 3</ng-template>
+                <div class="jumbotron center">
+
+                  <!-- 1-->
+                <label id="example-radio-group-label">Pay attention to details.</label><br>
+                    <mat-radio-group
+                      class="example-radio-group">
+                      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                        {{season}}
+                      </mat-radio-button><br>
+                    </mat-radio-group>
+
+                    <!-- 2-->
+                    <label id="example-radio-group-label">Make a mess of things.  </label><br>
+                        <mat-radio-group
+                          class="example-radio-group">
+                          <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                            {{season}}
+                          </mat-radio-button><br>
+                        </mat-radio-group>
+
+                        <!-- 3-->
+                        <label id="example-radio-group-label">Get chores done right away. </label><br>
+                            <mat-radio-group
+                              class="example-radio-group">
+                              <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                {{season}}
+                              </mat-radio-button><br>
+                            </mat-radio-group>
+                            <!-- 3-->
+                            <label id="example-radio-group-label">Often forget to put things back in their proper place </label><br>
+                                <mat-radio-group
+                                  class="example-radio-group">
+                                  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                    {{season}}
+                                  </mat-radio-button><br>
+                                </mat-radio-group>
+                                  <!-- 4-->
+                                <label id="example-radio-group-label">Like order  </label><br>
+                                    <mat-radio-group
+                                      class="example-radio-group">
+                                      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                        {{season}}
+                                      </mat-radio-button><br>
+                                    </mat-radio-group>
+
+                                    <!-- 5-->
+                                  <label id="example-radio-group-label"> Shirk my duties. </label><br>
+                                      <mat-radio-group
+                                        class="example-radio-group">
+                                        <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                          {{season}}
+                                        </mat-radio-button><br>
+                                      </mat-radio-group>
+                                      <!-- 6-->
+                                    <label id="example-radio-group-label">Follow a schedule  </label><br>
+                                        <mat-radio-group
+                                          class="example-radio-group">
+                                          <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                            {{season}}
+                                          </mat-radio-button><br>
+                                        </mat-radio-group>
+                                        <!-- 7-->
+                                      <label id="example-radio-group-label">Am exacting in my work.  </label><br>
+                                          <mat-radio-group
+                                            class="example-radio-group">
+                                            <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                              {{season}}
+                                            </mat-radio-button><br>
+                                          </mat-radio-group>
+                                          <!-- 7-->
+                                        <label id="example-radio-group-label">Get stressed out easily.</label><br>
+                                            <mat-radio-group
+                                              class="example-radio-group">
+                                              <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                {{season}}
+                                              </mat-radio-button><br>
+                                            </mat-radio-group>
+                                            <!-- 7-->
+                                          <label id="example-radio-group-label">Am relaxed most of the time </label><br>
+                                              <mat-radio-group
+                                                class="example-radio-group">
+                                                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                  {{season}}
+                                                </mat-radio-button><br>
+                                              </mat-radio-group>
+                                              <!-- 7-->
+                                            <label id="example-radio-group-label">Worry about things . </label><br>
+                                                <mat-radio-group
+                                                  class="example-radio-group">
+                                                  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                    {{season}}
+                                                  </mat-radio-button><br>
+                                                </mat-radio-group>
+                  <div>
+                      <button mat-button matStepperPrevious class="btn btn-info">Back</button>
+                      <button mat-button matStepperNext class="btn btn-primary">Next</button>
+                  </div>
+                </div>
+
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="fifthFormGroup">
+            <form [formGroup]="fifthFormGroup">
+                <ng-template matStepLabel>Personality 4</ng-template>
+                <div class="jumbotron center">
+
+                  <!-- 1-->
+                <label id="example-radio-group-label">Seldom feel blue </label><br>
+                    <mat-radio-group
+                      class="example-radio-group">
+                      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                        {{season}}
+                      </mat-radio-button><br>
+                    </mat-radio-group>
+
+                    <!-- 2-->
+                    <label id="example-radio-group-label">Am easily disturbed.  </label><br>
+                        <mat-radio-group
+                          class="example-radio-group">
+                          <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                            {{season}}
+                          </mat-radio-button><br>
+                        </mat-radio-group>
+
+                        <!-- 3-->
+                        <label id="example-radio-group-label">Get upset easily.  </label><br>
+                            <mat-radio-group
+                              class="example-radio-group">
+                              <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                {{season}}
+                              </mat-radio-button><br>
+                            </mat-radio-group>
+                            <!-- 3-->
+                            <label id="example-radio-group-label">Change my mood a lot. </label><br>
+                                <mat-radio-group
+                                  class="example-radio-group">
+                                  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                    {{season}}
+                                  </mat-radio-button><br>
+                                </mat-radio-group>
+                                  <!-- 4-->
+                                <label id="example-radio-group-label">Have frequent mood swings. </label><br>
+                                    <mat-radio-group
+                                      class="example-radio-group">
+                                      <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                        {{season}}
+                                      </mat-radio-button><br>
+                                    </mat-radio-group>
+
+                                    <!-- 5-->
+                                  <label id="example-radio-group-label">Get irritated easily. </label><br>
+                                      <mat-radio-group
+                                        class="example-radio-group">
+                                        <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                          {{season}}
+                                        </mat-radio-button><br>
+                                      </mat-radio-group>
+                                      <!-- 6-->
+                                    <label id="example-radio-group-label">Often feel blue. </label><br>
+                                        <mat-radio-group
+                                          class="example-radio-group">
+                                          <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                            {{season}}
+                                          </mat-radio-button><br>
+                                        </mat-radio-group>
+                                        <!-- 7-->
+                                      <label id="example-radio-group-label">Am exacting in my work.  </label><br>
+                                          <mat-radio-group
+                                            class="example-radio-group">
+                                            <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                              {{season}}
+                                            </mat-radio-button><br>
+                                          </mat-radio-group>
+                                          <!-- 7-->
+                                        <label id="example-radio-group-label">Understanding abstract ideas</label><br>
+                                            <mat-radio-group
+                                              class="example-radio-group">
+                                              <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                {{season}}
+                                              </mat-radio-button><br>
+                                            </mat-radio-group>
+                                            <!-- 7-->
+                                          <label id="example-radio-group-label">Am not interested in abstract ideas.</label><br>
+                                              <mat-radio-group
+                                                class="example-radio-group">
+                                                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                  {{season}}
+                                                </mat-radio-button><br>
+                                              </mat-radio-group>
+                                              <!-- 7-->
+                                            <label id="example-radio-group-label">Have a vivid imagination. </label><br>
+                                                <mat-radio-group
+                                                  class="example-radio-group">
+                                                  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                                                    {{season}}
+                                                  </mat-radio-button><br>
+                                                </mat-radio-group>
+                  <div>
+                      <button mat-button matStepperPrevious class="btn btn-info">Back</button>
+                      <button mat-button matStepperNext class="btn btn-primary">Next</button>
+                  </div>
+                </div>
+
+            </form>
+        </mat-step>
+
         <mat-step>
             <ng-template matStepLabel>Done</ng-template>
             <div class="jumbotron center">
@@ -87,10 +495,11 @@
             </div>
 
         </mat-step>
+
     </mat-horizontal-stepper>
-
-
   </div>
+
+
 
 </div>
 <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" routerLink="/dashboard/homepage">

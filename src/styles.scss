@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-.mat-tab-label-content {
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+/*.mat-tab-label-content {
   color: white !important;
 }
 .mat-stepper-label-position-bottom .mat-horizontal-stepper-header .mat-step-label{
@@ -18,4 +18,21 @@
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-inner-circle{
   background-color: blue !important;
+}
+*/
+body,head{
+ background-color: #212529 !important;
+  height: 100%;
+  width: 100%;
+}
+.jumbotron[_ngcontent-c3] {
+    background-color: #343a40 !important;
+}
+.mat-radio-label-content {
+  color: white !important;
+}
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+    -webkit-animation-name: cdk-text-field-autofill-end;
+    animation-name: cdk-text-field-autofill-end;
+    color: white !important;
 }

@@ -21,6 +21,10 @@ export class FormsComponent implements OnInit {
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
+  fourthFormGroup: FormGroup;
+  fifthFormGroup: FormGroup;
+
 
   Jobs1: jobs[] = [
    {value: 'gvt', viewValue: 'Government Job'},
@@ -35,6 +39,7 @@ export class FormsComponent implements OnInit {
   {value: 'hm', viewValue: 'Home Maker'},
   {value: 'other', viewValue: 'Other'}
 ];
+seasons: string[] = ['1', '2', '3', '4' ,'5 '];
 
   constructor(private _formBuilder: FormBuilder) {}
 
@@ -45,5 +50,15 @@ export class FormsComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+    this.thirdFormGroup = this._formBuilder.group({
+      thirdCtrl: ['', Validators.required]
+    });
+    this.fourthFormGroup = this._formBuilder.group({
+      fourthCtrl: ['', Validators.required]
+    });
+    this.fifthFormGroup = this._formBuilder.group({
+      fifthCtrl: ['', Validators.required]
+    });
+
   }
 }
