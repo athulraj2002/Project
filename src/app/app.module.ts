@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AuthService} from './home/auth.service';
 import {AuthGuard} from './home/auth-guard.service';
+import {DataFetchService} from './dashboard/data-fetch.service';
 import * as $ from 'jquery';
 
 import {HttpModule} from '@angular/http';
@@ -65,7 +66,7 @@ import {MatTableModule} from '@angular/material/table';
         HttpClientModule,
         MatSelectModule
   ],
-  providers: [AuthService,AuthGuard],
+  providers: [AuthService,AuthGuard,DataFetchService],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
 })

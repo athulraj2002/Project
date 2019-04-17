@@ -39,6 +39,10 @@ export class HomeComponent implements OnInit {
         emailLogin:['',[Validators.email,Validators.required]],
         passwdLogin:['',[Validators.required,Validators.minLength(6)]]
       });
+
+      var a =['1.2','2.3'];
+
+      console.log(a.map(Number));
   }
   onSignup(){
       this.authService.signupUser(this.signupform.value.uname,this.signupform.value.adno, this.signupform.value.uniregno, this.signupform.value.mailId, this.signupform.value.passwd1);

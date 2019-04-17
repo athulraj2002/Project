@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 export class AuthService{
   token: string;
   test: string;
+  userData:JSON;
   public fireAuth:firebase.auth.Auth;
  public userProfileRef:firebase.database.Reference;
 
@@ -33,6 +34,14 @@ export class AuthService{
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
+
+          this.userProfileRef.child(this.fireAuth.currentUser.uid).on('value', dataSnapshot => {
+
+            this.userData = dataSnapshot.val();
+
+
+  });
+
           this.userProfileRef.child(this.fireAuth.currentUser.uid).child('test').on('value', dataSnapshot => {
 
             this.test = dataSnapshot.val();
@@ -69,6 +78,10 @@ export class AuthService{
  }
  TestTaken() {
    return this.test == 'taken' ;
+ }
+
+ getUserData(){
+   return this.userData;
  }
 
 }

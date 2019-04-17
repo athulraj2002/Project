@@ -4,6 +4,8 @@ import {MatTableModule} from '@angular/material/table';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+//import {DataFetchService} from '../../dashboard/data-fetch.service';
+import {AuthService} from '../../home/auth.service';
 
 @Component({
   selector: 'app-homepage',
@@ -11,6 +13,7 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
+
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -52,7 +55,7 @@ export class HomepageComponent implements OnInit {
       scales: { xAxes: [{ticks:{
           fontColor:'white'
       }}], yAxes: [{     ticks: {
-            max : 100,
+            max : 10,
             min : 0,
             fontColor: 'white'
 
@@ -79,7 +82,7 @@ export class HomepageComponent implements OnInit {
     public lineChartPlugins = [pluginDataLabels];
 
     public lineChartData: ChartDataSets[] = [
-      { data: [65, 59, 80, 81, 56, 55, 40,78], label: 'GPA' }
+      { data: [6.5, 5.9, 8.0, 8.1, 5.6, 5.5, 4.0,7.8], label: 'GPA' }
     ];
     colors = [
 
@@ -99,9 +102,20 @@ export class HomepageComponent implements OnInit {
   public barChartData2: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40,78], label: 'percentage' }
   ];
-  constructor() { }
+
+  userData:JSON;
+  constructor(private authservice:AuthService) {
+    this.userData=this.authservice.getUserData();
+
+  }
 
   ngOnInit() {
+    this.lineChartLabels=Object.keys(this.userData['GPA']);
+    var dataArray=Object.values(this.userData['GPA']);
+    dataArray=dataArray.map(Number);
+    this.lineChartData=[
+      {data:dataArray,label:'GPA'}
+    ];
   }
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
       console.log(event, active);
@@ -111,7 +125,9 @@ export class HomepageComponent implements OnInit {
       console.log(event, active);
     }
 
-
-
+    dataFetch(){
+      this.userData=this.authservice.getUserData();
+      console.log(this.userData);
+    }
 
 }
