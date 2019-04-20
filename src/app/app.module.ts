@@ -30,6 +30,9 @@ import {MatTableModule} from '@angular/material/table';
    import {MatRadioModule} from '@angular/material/radio';
    import {MatCardModule} from '@angular/material/card';
    import {MatSelectModule} from '@angular/material/select';
+import { FacultyComponent } from './faculty/faculty.component';
+import { FacNavComponent } from './faculty/fac-nav/fac-nav.component';
+import { FacHomeComponent } from './faculty/fac-home/fac-home.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,10 @@ import {MatTableModule} from '@angular/material/table';
     DashNavComponent,
     HomeComponent,
     TaketestComponent,
-    HomepageComponent
+    HomepageComponent,
+    FacultyComponent,
+    FacNavComponent,
+    FacHomeComponent
   ],
   imports: [
     BrowserModule,
