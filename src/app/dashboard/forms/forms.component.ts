@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators,ReactiveFormsModule,FormsModule} from
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
+import { HttpClient } from '@angular/common/http';
 
 export interface jobs {
   value: string;
@@ -28,6 +29,7 @@ export class FormsComponent implements OnInit {
   fourthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
   sixthFormGroup: FormGroup;
+  ptype:JSON;
 
 Semester:semesters[]=[
   {value:'s1'},
@@ -60,7 +62,7 @@ Semester:semesters[]=[
 ];
 seasons: number[] = [1, 2, 3, 4 ,5];
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder,private httpClient: HttpClient) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -314,7 +316,13 @@ seasons: number[] = [1, 2, 3, 4 ,5];
 
             c5 = c5 + 2*(tp55);
             c5 = c5 + 2*this.negation((tn55));
-            console.log(c1,c2,c3,c4,c5);
+
+            this.httpClient.get('http://127.0.0.1:5002/predict/'+c1+'/'+c2+'/'+c3+'/'+c4+'/'+c5).subscribe(data => {
+      this.ptype = data as JSON;
+      console.log(c1,c2,c3,c4,c5);
+      console.log(this.ptype);
+    })
+
   }
 
 
