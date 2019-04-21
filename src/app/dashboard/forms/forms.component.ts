@@ -8,6 +8,9 @@ export interface jobs {
   value: string;
   viewValue: string;
 }
+export interface semesters{
+  value:string;
+}
 
 @Component({
   selector: 'app-forms',
@@ -25,7 +28,22 @@ export class FormsComponent implements OnInit {
   fourthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
 
-
+Semester:semesters[]=[
+  {value:'s1'},
+  {value:'s2'},
+  {value:'s3'},
+  {value:'s4'},
+  {value:'s5'},
+  {value:'s6'},
+  {value:'s7'},
+  {value:'s8'}
+];
+  Batches: jobs[] = [
+   {value: '2015-2019', viewValue: '2015-2019'},
+   {value: '2016-2020', viewValue: '2016-2020'},
+   {value: '2017-2021', viewValue: '2017-2021'},
+   {value: '2018-2022', viewValue: '2018-2022'}
+ ];
   Jobs1: jobs[] = [
    {value: 'gvt', viewValue: 'Government Job'},
    {value: 'pvt', viewValue: 'Private Job'},
@@ -45,7 +63,16 @@ seasons: string[] = ['1', '2', '3', '4' ,'5 '];
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      gender: ['male', Validators.required],
+      mobnum: ['', Validators.required],
+      age: ['', Validators.required],
+      adrs: ['', Validators.required],
+      fath_occup: ['', Validators.required],
+      moth_occup: ['', Validators.required],
+      daysch_host: ['daysch', Validators.required],
+      backlogs: ['', Validators.required],
+      Batch: ['', Validators.required],
+      sem: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
