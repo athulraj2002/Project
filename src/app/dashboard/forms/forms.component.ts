@@ -4,6 +4,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClient } from '@angular/common/http';
+import {AuthService} from '../../home/auth.service';
 
 export interface jobs {
   value: string;
@@ -62,7 +63,7 @@ Semester:semesters[]=[
 ];
 seasons: number[] = [1, 2, 3, 4 ,5];
 
-  constructor(private _formBuilder: FormBuilder,private httpClient: HttpClient) {}
+  constructor(private _formBuilder: FormBuilder,private httpClient: HttpClient,private authService:AuthService) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -77,6 +78,9 @@ seasons: number[] = [1, 2, 3, 4 ,5];
       Batch: ['', Validators.required],
       sem: ['', Validators.required]
     });
+
+
+
     this.secondFormGroup = this._formBuilder.group({
       rb1_1: [3, Validators.required],
       rb1_2: [3, Validators.required],
@@ -137,6 +141,14 @@ seasons: number[] = [1, 2, 3, 4 ,5];
       rb5_9: [3, Validators.required],
       rb5_10: [3, Validators.required]
     });
+  }
+
+
+  persData(){
+    let pf=this.firstFormGroup.value;
+    this.authService.insert(pf.gender,pf.mobnum,pf.age,pf.adrs,pf.fath_occup,pf.moth_occup,
+    pf.daysch_host,pf.backlogs,pf.Batch,pf.sem);
+
   }
 
   negation(val:number){
@@ -320,7 +332,8 @@ seasons: number[] = [1, 2, 3, 4 ,5];
             this.httpClient.get('http://127.0.0.1:5002/predict/'+c1+'/'+c2+'/'+c3+'/'+c4+'/'+c5).subscribe(data => {
       this.ptype = data as JSON;
       console.log(c1,c2,c3,c4,c5);
-      console.log(this.ptype);
+      console.log(this.ptype['text']);
+      this.authService.updatePtype(this.ptype['text']);
     })
 
   }

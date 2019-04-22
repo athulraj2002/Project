@@ -18,7 +18,7 @@ const routes: Routes = [
     {path:'fac-home',component:FacHomeComponent},
   ]},
   {path:'dashboard',component:DashboardComponent,  children:[
-      {path:'forms',component:FormsComponent},
+      {path:'forms',component:FormsComponent,canActivate:[AuthGuard]},
       {path:'',redirectTo:'homepage',pathMatch:'full',canActivate:[AuthGuard]},
       {path:'homepage',component:HomepageComponent,canActivate:[AuthGuard]},
       {path:'taketest',component:TaketestComponent,canActivate:[AuthGuard]},

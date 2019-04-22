@@ -65,6 +65,34 @@ export class AuthService{
       );
   }
 
+  insert(gender:string,mobnum:string,age:number,adrs:string,fath_occup:string,moth_occup:string,
+  daysch_host:string,backlogs:number,batch:string,sem:string){
+    this.userProfileRef.child(this.fireAuth.currentUser.uid).update({
+      gender:gender,
+      mob:mobnum,
+      age:age,
+      address:adrs,
+      foccup:fath_occup,
+      moccup:moth_occup,
+      dayhos:daysch_host,
+      backlogs:backlogs,
+      batch:batch,
+      sem:sem
+    },function(error){
+      if(error) console.log(error);
+      else console.log('success');
+    });
+  }
+  updatePtype(ptype:string){
+    this.userProfileRef.child(this.fireAuth.currentUser.uid).update({
+      ptype:ptype,
+      test:'taken'
+    },function(error){
+      if(error) console.log(error);
+      else console.log('success');
+    });
+  }
+
   getToken() {
     firebase.auth().currentUser.getIdToken()
       .then(
