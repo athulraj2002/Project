@@ -28,12 +28,12 @@ export class AuthService{
     })
     .catch(
         error => console.log(error)
-        
 
-        }
+
       );
   }
   signinUser(email: string, password: string) {
+
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(
         response => {
@@ -65,7 +65,8 @@ export class AuthService{
       )
       .catch(
         error => console.log(error)
-      );
+              );
+
   }
 
   insert(gender:string,mobnum:string,age:number,adrs:string,fath_occup:string,moth_occup:string,
