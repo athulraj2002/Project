@@ -33,6 +33,7 @@ import {MatTableModule} from '@angular/material/table';
 import { FacultyComponent } from './faculty/faculty.component';
 import { FacNavComponent } from './faculty/fac-nav/fac-nav.component';
 import { FacHomeComponent } from './faculty/fac-home/fac-home.component';
+import { NgxUiLoaderModule } from  'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { FacHomeComponent } from './faculty/fac-home/fac-home.component';
         ShowHidePasswordModule,
         HttpModule,
         HttpClientModule,
-        MatSelectModule
+        MatSelectModule,
+        NgxUiLoaderModule
   ],
   providers: [AuthService,AuthGuard,DataFetchService],
   bootstrap: [AppComponent],

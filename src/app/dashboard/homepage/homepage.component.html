@@ -14,13 +14,14 @@
 
                     <h6>adm no:{{userData.admno}}</h6>
                     <h6>univ reg no:{{userData.regno}}</h6>
-                    <h6>year:2015-2019</h6>
+                    <h6>year:{{userData.batch}}</h6>
                     <h6>department:CSE</h6>
 
                   </div>
                   <div class="col-md-6">
-                    <h6>address</h6>
-                    <h6>contact no</h6>
+                    <h6>Current Semester:{{userData.sem}}</h6>
+                    <h6>address:{{userData.address}}</h6>
+                    <h6>contact no:+91{{userData.mob}}</h6>
                   </div>
                 </div>
 
@@ -28,14 +29,14 @@
             <mat-tab label="Academic Info">
                 <h5>CGPA: xx</h5>
                 <h5>Activity Points</h5>
-                <h5>No of backlogs</h5>
-                ,<h5>etc</h5>
+                <h5>No of backlogs:{{userData.backlogs}}</h5>
+                <h5>etc</h5>
 
             </mat-tab>
             <mat-tab label="Personality Info">
                 <div class="row">
                   <div class="col-md-4">
-                    <h2>INTJ</h2>
+                    <h2>{{userData.ptype}}</h2>
                     <img src="assets/img/intj-architect.svg" alt="">
                   </div>
                   <div class="col-md-8">

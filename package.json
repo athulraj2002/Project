@@ -38,6 +38,7 @@
     "mdbootstrap": "^4.7.5",
     "ng2-charts": "^2.2.2",
     "ngx-show-hide-password": "^2.0.3",
+    "ngx-ui-loader": "^1.2.5",
     "popper.js": "^1.14.7",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
