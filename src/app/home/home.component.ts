@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   loginform : FormGroup;
   serverData: JSON;
   employeeData: JSON;
+  content:string;
 
 //  mailId = new FormControl('', [Validators.email,Validators.required]);
 //  passwd1 = new FormControl('', Validators.required);
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit {
 
   }
   onSignup(){
+    this.content="";
       this.ngxLoader.start();
       this.authService.signupUser(this.signupform.value.uname,this.signupform.value.adno, this.signupform.value.uniregno, this.signupform.value.mailId, this.signupform.value.passwd1);
       this.ngxLoader.stop();
