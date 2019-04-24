@@ -33,9 +33,11 @@
         <mat-tab label="Academics">
           <div class="cards">
             <div class="row">
-              <div class="col-md-4" *ngFor="let key of myob ">
-                    <mat-card  (click)="basicModal1.show()" mdbWavesEffect>{{results[key]['sem']}} <br>{{results[key]['series']}} Series</mat-card>
-                    <p >{{results[key]['res']}}</p>
+              <div class="col-md-4" *ngFor="let key of myob">
+                    <mat-card  (click)="basicModal1.show()" mdbWavesEffect>{{results[key]['sem']}} <br>{{results[key]['series']}} Series
+                      <br><p *ngFor="let sub of subs[myob.indexOf(key)]">{{sub}}:{{results[key]['res'][sub]}}</p>
+                    </mat-card>
+
               </div>
 
 

@@ -11,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./result-view.component.scss']
 })
 export class ResultViewComponent implements OnInit {
-  results;myob;
+  results;myob;subs=[];
+
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -54,10 +55,25 @@ export class ResultViewComponent implements OnInit {
                       },
                       sem:'s6',
                       series:'first'
-                    }
+                    },
+                    s6_2:{
+                                        res:{
+                                          compiler:'blah blah',
+                                          web:'blah'
+                                        },
+                                        sem:'s6',
+                                        series:'first'
+                                      }
                 };
+  console.log(this.results);
   this.myob=Object.keys(this.results);
-  console.log(this.results[this.myob[0]]);
+  console.log(this.myob);
+  for(let a in this.myob){
+          this.subs.push(Object.keys(this.results[this.myob[a]]['res']));
+  }
+  console.log(this.subs[0]);
+
+
 }
 
   ngOnInit() {
