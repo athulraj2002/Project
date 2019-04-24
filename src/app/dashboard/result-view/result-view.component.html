@@ -33,24 +33,11 @@
         <mat-tab label="Academics">
           <div class="cards">
             <div class="row">
-              <div class="col-md-4">
-                    <mat-card  (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
+              <div class="col-md-4" *ngFor="let key of myob ">
+                    <mat-card  (click)="basicModal1.show()" mdbWavesEffect>{{results[key]['sem']}} <br>{{results[key]['series']}} Series</mat-card>
+                    <p >{{results[key]['res']}}</p>
               </div>
-              <div class="col-md-4">
-                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
-              </div>
-              <div class="col-md-4">
-                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
-              </div>
-              <div class="col-md-4">
-                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
-              </div>
-              <div class="col-md-4">
-                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
-              </div>
-              <div class="col-md-4">
-                    <mat-card (click)="basicModal1.show()" mdbWavesEffect>Result 1 <br>On date</mat-card>
-              </div>
+
 
             </div>
 
