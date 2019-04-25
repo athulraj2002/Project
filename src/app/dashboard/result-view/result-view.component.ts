@@ -5,13 +5,15 @@ import { Component, OnInit } from '@angular/core';
  import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
  import * as pluginDataLabels from 'chartjs-plugin-datalabels';
  import { Label } from 'ng2-charts';
+ import {AuthService} from '../../home/auth.service';
+
 @Component({
   selector: 'app-result-view',
   templateUrl: './result-view.component.html',
   styleUrls: ['./result-view.component.scss']
 })
 export class ResultViewComponent implements OnInit {
-  results;myob;subs=[];
+  results;myob;subs=[];Ress;courses;semm:string="kr";seer:string="khsdgf";
 
 
   public barChartOptions: ChartOptions = {
@@ -46,25 +48,9 @@ export class ResultViewComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private authService:AuthService) {
 
-  this.results={s6_1:{
-                      res:{
-                        compiler:'blah blah',
-                        web:'blah'
-                      },
-                      sem:'s6',
-                      series:'first'
-                    },
-                    s6_2:{
-                                        res:{
-                                          compiler:'blah blah',
-                                          web:'blah'
-                                        },
-                                        sem:'s6',
-                                        series:'first'
-                                      }
-                };
+  this.results=this.authService.getUserData()['analysis'];
   console.log(this.results);
   this.myob=Object.keys(this.results);
   console.log(this.myob);
@@ -78,6 +64,13 @@ export class ResultViewComponent implements OnInit {
 
   ngOnInit() {
   }
+  setRes(res:any){
+      this.semm=res.sem;
+      this.seer=res.series;
+      this.Ress=res;
+      this.courses=Object.keys(this.Ress['res']);
+      console.log(this.Ress['sem']);
 
+  }
 
 }
