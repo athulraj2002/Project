@@ -1,9 +1,11 @@
 
-from flask import Flask, request
+from flask import Flask, request,abort,render_template,redirect,url_for
 from flask_cors import CORS, cross_origin
 from flask_restful import Resource, Api
 from json import dumps
 from flask_jsonpify import jsonify
+from werkzeug import secure_filename
+import os
 
 import numpy as np
 import pandas as pd
@@ -14,13 +16,25 @@ from sklearn.metrics import accuracy_score
 from sklearn import tree
 
 app = Flask(__name__)
+UPLOAD_FOLDER = './uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
 api = Api(app)
 
 CORS(app)
 
+
+
 @app.route("/")
 def hello():
     return jsonify({'text':'Hello Worldl!'})
+
+@app.route('/upload/',methods = ['GET','POST'])
+def upload_file():
+    if request.method =='POST':
+        file = request.files['file']
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
 
 class TestPath(Resource):
     def get(self):
