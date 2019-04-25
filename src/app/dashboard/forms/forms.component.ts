@@ -334,7 +334,7 @@ seasons: number[] = [1, 2, 3, 4 ,5];
       console.log(c1,c2,c3,c4,c5);
       console.log(this.ptype['text']);
       this.authService.updatePtype(this.ptype['text']);
-    })
+    });
 
   }
 

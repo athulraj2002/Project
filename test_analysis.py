@@ -29,7 +29,7 @@ series1.dropna(subset=['roll_no','name'], inplace=True)
 series1.index=[x for x in range(1,len(series1.index)+1)]
 
 #Analysis about a particular student
-university_roll_no = 'SCT15CS016' #get from app
+university_roll_no = 'SCT15CS040' #get from app
 series = series1['university_roll_no'] #create a new dataseries
 df=series1[series==university_roll_no] # create a new dataframe
 
@@ -38,13 +38,14 @@ df=series1[series==university_roll_no] # create a new dataframe
 # print(series1.describe())
 # print(series1)
 
+analy=""
 max_mark = series1.loc[series1.index[0],'total_marks']
 
-print('You secured ' + str(int(df['total_marks'])) + '/40 and your rank is ' + str(df.index[0]) + ' in your class.' )
+analy=analy+('You secured ' + str(int(df['total_marks'])) + '/40 and your rank is ' + str(df.index[0]) + ' in your class.' )+'\n'
 
-print('The maximum mark scored in your class is ' + str(max_mark))
+analy=analy+('The maximum mark scored in your class is ' + str(max_mark))+'\n'
 
-print('The question paper contained the following course outcomes: ' + str([str.upper(series1.columns[co]) for co in range(3,len(series1.columns)-1)]))
+analy=analy+('The question paper contained the following course outcomes: ' + str([str.upper(series1.columns[co]) for co in range(3,len(series1.columns)-1)]))+'\n'
 
 co1_mark=int(df.loc[df.index[0],'co1'])
 co2_mark=int(df.loc[df.index[0],'co2'])
@@ -58,8 +59,11 @@ co_percentage = [co1_percentage, co2_percentage, co3_percentage]
 
 for index,co_percent in enumerate(co_percentage):
     if(co_percent<=45):
-        print('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ' which is less than the average performance. So, Please refer the following topics : blah blah blah to improve your score')
+        analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ' which is less than the average performance. So, Please refer the following topics : blah blah blah to improve your score')+'\n'
     elif(co_percent>=75):
-        print('You scored '+ str(co_percent) + '% from CO' + str(index+1) + '. Awesome, Keep up the good work and you will reach greater heights. With great knowledge comes great responsibility.')
+        analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + '. Awesome, Keep up the good work and you will reach greater heights. With great knowledge comes great responsibility.')+'\n'
     else:
-        print('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ', you did good to get an overview about the topic but you need to improve a lot.')
+        analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ', you did good to get an overview about the topic but you need to improve a lot.')+'\n'
+
+
+print(analy)

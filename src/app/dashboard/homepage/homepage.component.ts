@@ -6,6 +6,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 //import {DataFetchService} from '../../dashboard/data-fetch.service';
 import {AuthService} from '../../home/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-homepage',
@@ -13,7 +14,7 @@ import {AuthService} from '../../home/auth.service';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-
+anaRe;analy;
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -104,8 +105,13 @@ export class HomepageComponent implements OnInit {
   ];
 
   userData:JSON;
-  constructor(private authservice:AuthService) {
+  constructor(private authservice:AuthService,private httpClient:HttpClient) {
     this.userData=this.authservice.getUserData();
+    this.httpClient.get('http://127.0.0.1:5002/analysis/'+this.userData['regno']).subscribe(data => {
+      this.anaRe = data as JSON;
+      this.analy=this.anaRe['analy'];
+      this.authservice.updateAnaly(this.analy);
+});
 
   }
 

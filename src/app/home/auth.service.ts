@@ -23,7 +23,8 @@ export class AuthService{
         regno: uniregno,
         admno:admno,
         email:email,
-        test:'not_taken'
+        test:'not_taken',
+        analysis:''
       });
     })
     .catch(
@@ -114,6 +115,19 @@ export class AuthService{
 
  getUserData(){
    return this.userData;
+ }
+ updateAnaly(ana:string){
+   this.userProfileRef.child(this.fireAuth.currentUser.uid).child('analysis').update({s6_1:{
+     res:{
+       compiler:ana
+     },
+     series:'first',
+     sem:'s6'
+   }
+ },function(error){
+     if(error) console.log(error);
+     else console.log('success ana update');
+   });
  }
 
 }
