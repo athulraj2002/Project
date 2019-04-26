@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClientModule, HttpClient, HttpRequest, HttpResponse, HttpEventType} from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormBuilder, FormGroup, Validators,ReactiveFormsModule,FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-fac-nav',
@@ -11,6 +12,10 @@ export class FacNavComponent implements OnInit {
 
   percentDone: number;
     uploadSuccess: boolean;
+    fileupload:FormGroup;
+    fileToUpload;
+    formData;
+    upMsg:string="";
 
   upload(files: File[]){
     //pick from one of the 4 styles of file uploads below
@@ -63,17 +68,42 @@ export class FacNavComponent implements OnInit {
     });
   }
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient,private _formBuilder: FormBuilder) { }
 
 
 
 
 
   ngOnInit() {
+
+    this.fileupload=this._formBuilder.group(
+      {uplo:['',Validators.required]}
+    );
   }
   navbarOpen = false;
 
     toggleNavbar() {
       this.navbarOpen = !this.navbarOpen;
     }
+
+    postMethod(files: FileList) {
+            this.fileToUpload = files.item(0);
+            this.formData = new FormData();
+            this.formData.append('file', this.fileToUpload, this.fileToUpload.name);
+            console.log(this.formData);
+            //return false;
+  }
+  uploadFunc(){
+  /*  const httpOptions = {
+    headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data',
+    })
+  };*/
+  this.upMsg="";
+    this.http.post("http://127.0.0.1:5002/upload/", this.formData).subscribe((val) => {
+
+      console.log(val);
+      this.upMsg=val['msg'];
+    });
+  }
 }

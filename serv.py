@@ -16,7 +16,7 @@ from sklearn.metrics import accuracy_score
 from sklearn import tree
 
 app = Flask(__name__)
-UPLOAD_FOLDER = './uploads'
+UPLOAD_FOLDER = 'upload'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
 api = Api(app)
 
@@ -28,13 +28,12 @@ CORS(app)
 def hello():
     return jsonify({'text':'Hello Worldl!'})
 
-@app.route('/upload/',methods = ['GET','POST'])
-def upload_file():
-    if request.method =='POST':
-        file = request.files['file']
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+class Upload(Resource):
+  def post(self):
+        f = request.files['file']
+	f.save(secure_filename(f.filename))
+      	return jsonify({'msg':'success'})
+        
 
 class TestPath(Resource):
     def get(self):
@@ -140,7 +139,7 @@ class Analysis(Resource):
 api.add_resource(TestPath, '/test') # Route_1
 api.add_resource(PredictType, '/predict/<int:c1>/<int:c2>/<int:c3>/<int:c4>/<int:c5>/')
 api.add_resource(Analysis, '/analysis/<unino>')
-
+api.add_resource(Upload, '/upload/')
 
 if __name__ == '__main__':
    app.run(port=5002)
