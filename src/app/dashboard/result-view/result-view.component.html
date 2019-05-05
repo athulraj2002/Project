@@ -114,7 +114,7 @@
           <mat-tab label="Analysis">
               <div class="" *ngFor="let course of courses">
                 <h3> {{course}} </h3>
-                <p >{{Ress['res'][course]}}</p>
+                <p [innerHTML]="Ress['res'][course]"></p>
 
               </div>
 

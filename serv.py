@@ -17,7 +17,7 @@ from sklearn import tree
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'upload'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 api = Api(app)
 
 CORS(app)
@@ -33,12 +33,12 @@ class Upload(Resource):
         f = request.files['file']
 	f.save(secure_filename(f.filename))
       	return jsonify({'msg':'success'})
-        
+
 
 class TestPath(Resource):
     def get(self):
         return jsonify({'text':'Hello World test!'})
-       
+
 class PredictType(Resource):
  def get(self,c1,c2,c3,c4,c5):
     balance_data = pd.read_csv( 'dataset.csv',sep= ',', header= None)
@@ -108,11 +108,11 @@ class Analysis(Resource):
 	analy=""
 	max_mark = series1.loc[series1.index[0],'total_marks']
 
-	analy=analy+('You secured ' + str(int(df['total_marks'])) + '/40 and your rank is ' + str(df.index[0]) + ' in your class.' )+'\n'
+	analy=analy+('You secured <strong>' + str(int(df['total_marks'])) + '/40 </strong> and your rank is <b>' + str(df.index[0]) + '</b> in your class.' )+'<br>'
 
-	analy=analy+('The maximum mark scored in your class is ' + str(max_mark))+'\n'
+	analy=analy+('The maximum mark scored in your class is ' + str(max_mark))+'<br>'
 
-	analy=analy+('The question paper contained the following course outcomes: ' + str([str.upper(series1.columns[co]) for co in range(3,len(series1.columns)-1)]))+'\n'
+	analy=analy+('The question paper contained the following course outcomes: ' + str([str.upper(series1.columns[co]) for co in range(3,len(series1.columns)-1)]))+'<br>'
 
 	co1_mark=int(df.loc[df.index[0],'co1'])
 	co2_mark=int(df.loc[df.index[0],'co2'])
@@ -126,11 +126,11 @@ class Analysis(Resource):
 
 	for index,co_percent in enumerate(co_percentage):
 	    if(co_percent<=45):
-		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ' which is less than the average performance. So, Please refer the following topics : blah blah blah to improve your score')+'\n'
+		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ' <i>which is less than the average performance</i>. So, Please refer the following topics : blah blah blah to improve your score')+'<br>'
 	    elif(co_percent>=75):
-		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + '. Awesome, Keep up the good work and you will reach greater heights. With great knowledge comes great responsibility.')+'\n'
+		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + '. Awesome, Keep up the good work and you will reach greater heights. With great knowledge comes great responsibility.')+'<br>'
 	    else:
-		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ', you did good to get an overview about the topic but you need to improve a lot.')+'\n'
+		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ', you did good to get an overview about the topic but you need to improve a lot.')+'<br>'
 
 
 	#print(analy)
