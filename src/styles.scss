@@ -24,6 +24,7 @@ body,head{
  background-color: #212529 !important;
   height: 100%;
   width: 100%;
+  color: white;
 }
 .jumbotron[_ngcontent-c3] {
     background-color: #343a40 !important;
@@ -35,4 +36,7 @@ body,head{
     -webkit-animation-name: cdk-text-field-autofill-end;
     animation-name: cdk-text-field-autofill-end;
     color: white !important;
+}
+.modal-dialog .modal-content{
+  background-color: #343a40 !important;
 }

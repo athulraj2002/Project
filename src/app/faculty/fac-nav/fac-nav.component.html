@@ -46,7 +46,37 @@
       </div>
       <div class="modal-body">
             <form #form class=""  [formGroup]="fileupload" enctype="multipart/form-data">
+              <mat-form-field formControlName="sem">
+                <mat-label>Semester</mat-label>
+                <mat-select >
+                  <mat-option *ngFor="let sem of Semester" [value]="sem.value" >
+                    {{sem.value}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field><br>
+
+              <mat-form-field formControlName="series">
+                <mat-label>Series</mat-label>
+                <mat-select >
+                  <mat-option *ngFor="let ser of Ser" [value]="ser.value" >
+                    {{ser.value}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field><br>
+
+              <mat-form-field formControlName="batch">
+                  <mat-label>Batch</mat-label>
+                  <mat-select >
+                    <mat-option *ngFor="let batch of Batches" [value]="batch.value">
+                      {{batch.value}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <br>
+
                     <input type="file" name="file" required formControlName="uplo" (change)="postMethod($event.target.files)">
+              <br>
+
             </form>
       </div>
       <p>{{upMsg}}</p>

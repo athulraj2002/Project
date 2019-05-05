@@ -2,12 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClientModule, HttpClient, HttpRequest, HttpResponse, HttpEventType} from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormBuilder, FormGroup, Validators,ReactiveFormsModule,FormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+
+export interface semesters{
+  value:string;
+}
 
 @Component({
   selector: 'app-fac-nav',
   templateUrl: './fac-nav.component.html',
   styleUrls: ['./fac-nav.component.scss']
 })
+
 export class FacNavComponent implements OnInit {
 
   percentDone: number;
@@ -16,6 +22,26 @@ export class FacNavComponent implements OnInit {
     fileToUpload;
     formData;
     upMsg:string="";
+    Semester:semesters[]=[
+      {value:'s1'},
+      {value:'s2'},
+      {value:'s3'},
+      {value:'s4'},
+      {value:'s5'},
+      {value:'s6'},
+      {value:'s7'},
+      {value:'s8'}
+    ];
+    Ser:semesters[]=[
+      {value:'first'},
+      {value:'second'}
+    ];
+    Batches: semesters[] = [
+     {value: '2015-2019'},
+     {value: '2016-2020'},
+     {value: '2017-2021'},
+     {value: '2018-2022'}
+   ];
 
   upload(files: File[]){
     //pick from one of the 4 styles of file uploads below
