@@ -4,6 +4,7 @@ import {HomeComponent} from './home/home.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {TaketestComponent} from './dashboard/taketest/taketest.component';
 import {FormsComponent} from './dashboard/forms/forms.component';
+import {PredictedComponent} from './dashboard/predicted/predicted.component';
 import {ResultViewComponent} from './dashboard/result-view/result-view.component';
 import {HomepageComponent} from './dashboard/homepage/homepage.component';
 import {AuthGuard} from './home/auth-guard.service';
@@ -22,7 +23,8 @@ const routes: Routes = [
       {path:'',redirectTo:'homepage',pathMatch:'full',canActivate:[AuthGuard]},
       {path:'homepage',component:HomepageComponent,canActivate:[AuthGuard]},
       {path:'taketest',component:TaketestComponent,canActivate:[AuthGuard]},
-      {path:'result-view',component:ResultViewComponent,canActivate:[AuthGuard]},
+      {path:'predicted',component:PredictedComponent},
+      {path:'result-view',component:ResultViewComponent},
 
     ] }
 ];

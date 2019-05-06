@@ -34,6 +34,7 @@ import { FacultyComponent } from './faculty/faculty.component';
 import { FacNavComponent } from './faculty/fac-nav/fac-nav.component';
 import { FacHomeComponent } from './faculty/fac-home/fac-home.component';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { PredictedComponent } from './dashboard/predicted/predicted.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { NgxUiLoaderModule } from  'ngx-ui-loader';
     HomepageComponent,
     FacultyComponent,
     FacNavComponent,
-    FacHomeComponent
+    FacHomeComponent,
+    PredictedComponent
   ],
   imports: [
     BrowserModule,
