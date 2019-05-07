@@ -4,24 +4,18 @@
         <mat-tab label="Analysis">
           <div class="cards">
             <div class="row">
-              <div class="col-md-4">
-                    <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 1 </mat-card>
-              </div>
-              <div class="col-md-4">
-                    <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 2 </mat-card>
-              </div>
-              <div class="col-md-4">
-                        <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 3 </mat-card>
-              </div>
-              <div class="col-md-4">
-                    <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 1 </mat-card>
-              </div>
-              <div class="col-md-4">
-                    <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 2 </mat-card>
-              </div>
-              <div class="col-md-4">
-                        <mat-card (click)="basicModal.show()" mdbWavesEffect>Analysis 3 </mat-card>
-              </div>
+              <div class="col-md-6 offset-md-3">
+                <mat-form-field >
+                  <mat-label>Subjects</mat-label>
+                  <mat-select formControlName="sem">
+                    <mat-option *ngFor="let sem of Semester" [value]="sem.value" >
+                      {{sem.value}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <button type="button" class="btn btn-primary ml-5" name="button">View</button>
+                </div>
             </div>
 
 

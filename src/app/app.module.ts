@@ -9,7 +9,7 @@ import {AuthService} from './home/auth.service';
 import {AuthGuard} from './home/auth-guard.service';
 import {DataFetchService} from './dashboard/data-fetch.service';
 import * as $ from 'jquery';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 import {HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { MatStepperModule, MatInputModule, MatButtonModule, MatAutocompleteModule } from '@angular/material';
@@ -53,7 +53,8 @@ import { PredictedComponent } from './dashboard/predicted/predicted.component';
     FacultyComponent,
     FacNavComponent,
     FacHomeComponent,
-    PredictedComponent
+    PredictedComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -74,7 +75,8 @@ import { PredictedComponent } from './dashboard/predicted/predicted.component';
         HttpModule,
         HttpClientModule,
         MatSelectModule,
-        NgxUiLoaderModule
+        NgxUiLoaderModule,
+        MatExpansionModule
   ],
   providers: [AuthService,AuthGuard,DataFetchService],
   bootstrap: [AppComponent],

@@ -7,6 +7,7 @@ import { Label } from 'ng2-charts';
 //import {DataFetchService} from '../../dashboard/data-fetch.service';
 import {AuthService} from '../../home/auth.service';
 import { HttpClient } from '@angular/common/http';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-homepage',
@@ -14,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
+  panelOpenState = false;
 anaRe;analy;
   public barChartOptions: ChartOptions = {
     responsive: true,

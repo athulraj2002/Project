@@ -24,7 +24,7 @@ const routes: Routes = [
       {path:'homepage',component:HomepageComponent,canActivate:[AuthGuard]},
       {path:'taketest',component:TaketestComponent,canActivate:[AuthGuard]},
       {path:'predicted',component:PredictedComponent,canActivate:[AuthGuard]},
-      {path:'result-view',component:ResultViewComponent,canActivate:[AuthGuard]},
+      {path:'result-view',component:ResultViewComponent},
 
     ] }
 ];

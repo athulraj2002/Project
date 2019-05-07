@@ -15,7 +15,16 @@ import { Component, OnInit } from '@angular/core';
 export class ResultViewComponent implements OnInit {
   results;myob;subs=[];Ress;courses;semm:string="kr";seer:string="khsdgf";
 
-
+  Semester:semesters[]=[
+    {value:'s1'},
+    {value:'s2'},
+    {value:'s3'},
+    {value:'s4'},
+    {value:'s5'},
+    {value:'s6'},
+    {value:'s7'},
+    {value:'s8'}
+  ];
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
