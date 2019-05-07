@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
  import { Label } from 'ng2-charts';
  import {AuthService} from '../../home/auth.service';
 
+ export interface semesters{
+   value:string;
+ }
+
 @Component({
   selector: 'app-result-view',
   templateUrl: './result-view.component.html',
