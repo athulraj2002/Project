@@ -23,8 +23,8 @@ const routes: Routes = [
       {path:'',redirectTo:'homepage',pathMatch:'full',canActivate:[AuthGuard]},
       {path:'homepage',component:HomepageComponent,canActivate:[AuthGuard]},
       {path:'taketest',component:TaketestComponent,canActivate:[AuthGuard]},
-      {path:'predicted',component:PredictedComponent},
-      {path:'result-view',component:ResultViewComponent},
+      {path:'predicted',component:PredictedComponent,canActivate:[AuthGuard]},
+      {path:'result-view',component:ResultViewComponent,canActivate:[AuthGuard]},
 
     ] }
 ];

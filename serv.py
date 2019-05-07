@@ -29,9 +29,13 @@ def hello():
     return jsonify({'text':'Hello Worldl!'})
 
 class Upload(Resource):
-  def post(self):
+  def post(self,batch,sem,series):
+        UPLOAD_FOLDER='upload/'+batch+'/'+sem+'/'+series
+        os.makedirs(UPLOAD_FOLDER)
+        app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
         f = request.files['file']
-	f.save(secure_filename(f.filename))
+        filename = secure_filename(f.filename)
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
       	return jsonify({'msg':'success'})
 
 
@@ -139,7 +143,7 @@ class Analysis(Resource):
 api.add_resource(TestPath, '/test') # Route_1
 api.add_resource(PredictType, '/predict/<int:c1>/<int:c2>/<int:c3>/<int:c4>/<int:c5>/')
 api.add_resource(Analysis, '/analysis/<unino>')
-api.add_resource(Upload, '/upload/')
+api.add_resource(Upload, '/upload/<batch>/<sem>/<series>')
 
 if __name__ == '__main__':
    app.run(port=5002)

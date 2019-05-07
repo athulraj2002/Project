@@ -46,27 +46,27 @@
       </div>
       <div class="modal-body">
             <form #form class=""  [formGroup]="fileupload" enctype="multipart/form-data">
-              <mat-form-field formControlName="sem">
+              <mat-form-field >
                 <mat-label>Semester</mat-label>
-                <mat-select >
+                <mat-select formControlName="sem">
                   <mat-option *ngFor="let sem of Semester" [value]="sem.value" >
                     {{sem.value}}
                   </mat-option>
                 </mat-select>
               </mat-form-field><br>
 
-              <mat-form-field formControlName="series">
+              <mat-form-field >
                 <mat-label>Series</mat-label>
-                <mat-select >
+                <mat-select formControlName="series">
                   <mat-option *ngFor="let ser of Ser" [value]="ser.value" >
                     {{ser.value}}
                   </mat-option>
                 </mat-select>
               </mat-form-field><br>
 
-              <mat-form-field formControlName="batch">
+              <mat-form-field >
                   <mat-label>Batch</mat-label>
-                  <mat-select >
+                  <mat-select formControlName="batch">
                     <mat-option *ngFor="let batch of Batches" [value]="batch.value">
                       {{batch.value}}
                     </mat-option>

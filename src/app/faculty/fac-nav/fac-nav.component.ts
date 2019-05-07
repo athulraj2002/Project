@@ -103,8 +103,11 @@ export class FacNavComponent implements OnInit {
   ngOnInit() {
 
     this.fileupload=this._formBuilder.group(
-      {uplo:['',Validators.required]}
-    );
+      {uplo:['',Validators.required],
+       batch:['',Validators.required],
+       sem:['',Validators.required],
+       series:['',Validators.required]
+    });
   }
   navbarOpen = false;
 
@@ -125,8 +128,9 @@ export class FacNavComponent implements OnInit {
         'Content-Type': 'multipart/form-data',
     })
   };*/
+  let options=this.fileupload.value;
   this.upMsg="";
-    this.http.post("http://127.0.0.1:5002/upload/", this.formData).subscribe((val) => {
+    this.http.post('http://127.0.0.1:5002/upload/'+options.batch+'/'+options.sem+'/'+options.series, this.formData).subscribe((val) => {
 
       console.log(val);
       this.upMsg=val['msg'];
