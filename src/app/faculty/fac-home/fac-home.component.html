@@ -13,12 +13,14 @@
 
   </div>
   <div class="container">
-    <h4>Series 1</h4>
-    <h6>{{message['course_name']}}</h6>
+    <br><br>
+    <h2 *ngIf="!message['passed']">Upload Series Mark file from nav-bar</h2>
+    <h4 *ngIf="message['passed']">Series 1</h4>
+    <h6 *ngIf="message['passed']">{{message['course_name']}}</h6>
     <div class="row">
 
-      <div class="col-md-6">
-        <h6>Mark Distribution</h6>
+      <div class="col-md-6" *ngIf="message['passed']">
+        <h6 *ngIf="message['passed']">Mark Distribution</h6>
         <div style="display: block" *ngIf="message['total_mark_distrib']">
           <canvas baseChart
             [datasets]="[{data:message['total_mark_distrib'],label:'distribution'}]"
@@ -31,7 +33,7 @@
           </canvas>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" *ngIf="message['passed']">
         <h6>PASS:{{message['passed']}}</h6>
         <div style="display: block" *ngIf="message['passed']">
       <canvas baseChart
@@ -43,8 +45,44 @@
       </div>
 
     </div>
-    <div class="row">
+    <div class="row" *ngIf="message['top_five']">
+      <h3>Top 5</h3>
+            <table class="table table-striped" style="background-color:#f8f9fae0;border-radius:5px;">
+       <thead>
+         <tr>
+           <th>Uni.Reg.No</th>
+           <th>Name</th>
+           <th>Marks</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr *ngFor="let per of message['top_five']">
+           <td>{{per['uni_no']}}</td>
+           <td>{{per['name']}}</td>
+           <td>{{per['mark']}}</td>
+         </tr>
+       </tbody>
+      </table>
+    </div>
 
+    <div class="row" *ngIf="message['least_five']">
+      <h3>Least 5</h3>
+            <table class="table table-striped" style="background-color:#f8f9fae0;border-radius:5px;">
+       <thead>
+         <tr>
+           <th>Uni.Reg.No</th>
+           <th>Name</th>
+           <th>Marks</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr *ngFor="let per of message['least_five']">
+           <td>{{per['uni_no']}}</td>
+           <td>{{per['name']}}</td>
+           <td>{{per['mark']}}</td>
+         </tr>
+       </tbody>
+      </table>
     </div>
 
   </div>
