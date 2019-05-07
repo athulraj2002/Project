@@ -1,0 +1,51 @@
+{
+
+ESTJ:{
+	
+	description:"",
+	career_option:{
+		Manaement:["Management","Bussiness Management"," Management in Public Sector","Stock Broker","Accounting"],
+		Technical:["Engineering"],
+		Legal&Law:["Military Training","Police","Security service"]
+		}
+
+					
+	
+},
+ISTJ:{
+	description:"",
+	career_option:{
+		Management:["Management","Admininstrative Managemnt"],
+		Technical:["Software Engineering","Technical Education"]
+		
+		}
+},
+ENTJ:{
+	description:"",
+	career_option:{
+		Management:["Business Management","Management Education","Military Education","Politics"],
+		SocialService:["Counseling"],
+		Technical/Science:["Engineering Jobs","Insdustrial Management","Manufacturing Management","Higher Studies","Software engineering"]
+
+	}
+
+INTJ:{
+	description:"",
+	career_option:{
+		Technical/Sience:["Software Engineer","Natural Science","Teaching"],
+		Management:["Management","Entrepreneurship"]
+
+	}
+ESTP:{
+	description:"",
+	career_option:{
+		Management:["Business Management","Sales/Marketing Specialist","Entrepreneurship","Stock Broker"],
+		CustomerService:["Customer Service"]
+	}
+
+ISTP:{
+	description:"",
+	career_option:{
+		Technical:[""]
+	}
+}
