@@ -2,10 +2,10 @@
   <div class="">
     <div class="row">
       <div class="col-md-6">
-            <h6>Attentention Required:10</h6>
+            <h6>Attentention Required:0</h6>
       </div>
       <div class="col-md-6">
-            <h6>Currently Under:2</h6>
+            <h6>Currently Under:0</h6>
       </div>
     </div>
 
@@ -14,51 +14,37 @@
   </div>
   <div class="container">
     <h4>Series 1</h4>
-    <h6>Subject , Date ,</h6>
+    <h6>{{message['course_name']}}</h6>
     <div class="row">
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <h6>Mark Distribution</h6>
-        <div style="display: block">
-      <!--    <canvas baseChart
-            [datasets]="lineChartData"
-            [labels]="lineChartLabels"
-            [options]="lineChartOptions"
-            [plugins]="lineChartPlugins"
-            [legend]="lineChartLegend"
+        <div style="display: block" *ngIf="message['total_mark_distrib']">
+          <canvas baseChart
+            [datasets]="[{data:message['total_mark_distrib'],label:'distribution'}]"
+            [labels]="barChartLabels.slice(0,message['total_mark_distrib'].length)"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
             [colors]="colors"
-            [chartType]="lineChartType">
-          </canvas> -->
+            [chartType]="barChartType">
+          </canvas>
         </div>
       </div>
-      <div class="col-md-4">
-        <h6>NO of pass&fail</h6>
-        <div style="display: block">
-        <!--  <canvas baseChart
-            [datasets]="lineChartData"
-            [labels]="lineChartLabels"
-            [options]="lineChartOptions"
-            [plugins]="lineChartPlugins"
-            [legend]="lineChartLegend"
-            [colors]="colors"
-            [chartType]="lineChartType">
-          </canvas> -->
-        </div>
+      <div class="col-md-6">
+        <h6>PASS:{{message['passed']}}</h6>
+        <div style="display: block" *ngIf="message['passed']">
+      <canvas baseChart
+        [data]="[message['passed'],message['failed']]"
+        [labels]="doughnutChartLabels"
+        [chartType]="doughnutChartType">
+      </canvas>
+    </div>
       </div>
-      <div class="col-md-4">
 
-        <div style="display: block">
-        <!--  <canvas baseChart
-            [datasets]="lineChartData"
-            [labels]="lineChartLabels"
-            [options]="lineChartOptions"
-            [plugins]="lineChartPlugins"
-            [legend]="lineChartLegend"
-            [colors]="colors"
-            [chartType]="lineChartType">
-          </canvas> -->
-        </div>
-      </div>
+    </div>
+    <div class="row">
+
     </div>
 
   </div>

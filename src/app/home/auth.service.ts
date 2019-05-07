@@ -2,12 +2,15 @@ import * as firebase from 'firebase';
 import {Http} from '@angular/http';
 import {Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthService{
   token: string;
   test: string;
   userData:JSON;
+  private messageSource = new BehaviorSubject('nouploads');
+  fileData = this.messageSource.asObservable();
   public fireAuth:firebase.auth.Auth;
  public userProfileRef:firebase.database.Reference;
 
@@ -128,6 +131,11 @@ export class AuthService{
      if(error) console.log(error);
      else console.log('success ana update');
    });
+ }
+
+
+ filedata(data:any){
+   this.messageSource.next(data);
  }
 
 }

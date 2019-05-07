@@ -23,6 +23,153 @@ api = Api(app)
 CORS(app)
 
 
+def get_analysis(file_path,series_no):
+
+    #code to extract course name and course code
+    sub_name_data_set=pd.read_excel(file_path,skiprows=[0])
+    sub_name=sub_name_data_set.iloc[0,2]
+    # print(sub_name)
+
+    #code to extract the course outcomes and find out the maximum marks of each co
+    co_max_marks = pd.read_excel(file_path,skiprows=[x for x in range(0,6)])
+    max_marks=[]
+    for co_index in range(19,30,1):
+        if(co_max_marks.iloc[0,co_index]==0):
+            break
+        max_marks.append(co_max_marks.iloc[0,co_index])
+    # print(max_marks)
+    number_cos=len(max_marks)
+
+    #code to extract data from the excel file
+    series = pd.read_excel(file_path,na_values=['NaN'],usecols=[0,1,2]+[x for x in range(19,19+number_cos,1)],skiprows=[0,1,2,3,4,5,6])
+
+    #add column names to the dataframe
+    co_names=[]
+    for i in range(1,number_cos+1,1):
+        co_names.append('co'+str(i))
+    # print(co_names)
+    column_labels=['roll_no','university_roll_no','name']+co_names
+    series.columns=column_labels
+
+
+    #add new column total_marks
+    series['total_marks']=0
+    for index in range(1,number_cos+1,1):
+        series['total_marks']+=series['co'+str(index)]
+    # print(series)
+
+    #sort the dataframe based on total_marks in descending order
+    series = series.sort_values('total_marks',ascending=False)
+
+    #drop rows having missing values
+    series.dropna(subset=['roll_no','name'], inplace=True)
+
+    #recreate and intialie the index to new ones
+    series.index=[x for x in range(1,len(series.index)+1)]
+    # print(series)
+
+
+    #maximium total mark
+    max_total_marks=0
+    for mark in max_marks:
+        max_total_marks+=mark
+
+    #code to calculate total pass and fail
+    total_pass=0;total_fail=0
+    for total_mark in series.loc[:,'total_marks']:
+        if(float(total_mark/max_total_marks)>=0.45):
+            total_pass+=1
+        else:
+            total_fail+=1
+
+    #code to create total_mark distribution
+    total_mark=[0 for x in range(0,int(max_total_marks/10))]
+    for mark in series.loc[:,'total_marks']:
+        if(mark%10==0):
+            total_mark[int(mark/10)-1]=total_mark[int(mark/10)-1]+1
+        else:
+            total_mark[int(mark/10)]=total_mark[int(mark/10)]+1
+
+    top_five = series.head()
+    least_five= series.tail()
+    least_five.index=[x for x in range(5,0,-1)]
+
+    result={}
+    result['course_name']=sub_name
+    result['passed']=total_pass
+    result['failed']=total_fail
+    result['total_mark_distrib']=total_mark
+    result['top_five']=[{
+            'uni_no' : top_five.loc[1,'university_roll_no'],
+            'name'   : top_five.loc[1,'name'],
+            'mark'   : top_five.loc[1,'total_marks']
+            },
+        {
+            'uni_no' : top_five.loc[2,'university_roll_no'],
+            'name'   : top_five.loc[2,'name'],
+            'mark'   : top_five.loc[2,'total_marks']
+            },
+        {
+            'uni_no' : top_five.loc[3,'university_roll_no'],
+            'name'   : top_five.loc[3,'name'],
+            'mark'   : top_five.loc[3,'total_marks']
+            },
+        {
+            'uni_no' : top_five.loc[4,'university_roll_no'],
+            'name'   : top_five.loc[4,'name'],
+            'mark'   : top_five.loc[4,'total_marks']
+            },
+        {
+            'uni_no' : top_five.loc[5,'university_roll_no'],
+            'name'   : top_five.loc[5,'name'],
+            'mark'   : top_five.loc[5,'total_marks']
+            }]
+
+    result['least_five']=[{
+            'uni_no' : least_five.loc[1,'university_roll_no'],
+            'name'   : least_five.loc[1,'name'],
+            'mark'   : least_five.loc[1,'total_marks']
+            },
+        {
+            'uni_no' : least_five.loc[2,'university_roll_no'],
+            'name'   : least_five.loc[2,'name'],
+            'mark'   : least_five.loc[2,'total_marks']
+            },
+        {
+            'uni_no' : least_five.loc[3,'university_roll_no'],
+            'name'   : least_five.loc[3,'name'],
+            'mark'   : least_five.loc[3,'total_marks']
+            },
+        {
+            'uni_no' : least_five.loc[4,'university_roll_no'],
+            'name'   : least_five.loc[4,'name'],
+            'mark'   : least_five.loc[4,'total_marks']
+            },
+        {
+            'uni_no' : least_five.loc[5,'university_roll_no'],
+            'name'   : least_five.loc[5,'name'],
+            'mark'   : least_five.loc[5,'total_marks']
+            }]
+
+
+    #code to create co distribution
+    # marks=[]
+    # for co_index in range(3,3+number_cos):
+    #     co_list=[]
+    #     if(max_marks[co_index-3]%10==0):
+    #         co_list=[0 for x in range(0,int(max_marks[co_index-3]/10))]
+    #     elif(max_marks[co_index-3]%10!=0):
+    #         co_list=[0 for x in range(0,int(max_marks[co_index-3]/10+1))]
+    #     print(co_list)
+    #     for mark in series.iloc[:,co_index]:
+    #         if(mark%10==0):
+    #             co_list[int(mark/10)-1]=co_list[int(mark/10)-1]+1
+    #         else:
+    #             co_list[int(mark/10)]=co_list[int(mark/10)]+1
+    #     marks.append(co_list)
+
+    return result
+
 
 @app.route("/")
 def hello():
@@ -31,12 +178,14 @@ def hello():
 class Upload(Resource):
   def post(self,batch,sem,series):
         UPLOAD_FOLDER='upload/'+batch+'/'+sem+'/'+series
-        os.makedirs(UPLOAD_FOLDER)
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.makedirs(UPLOAD_FOLDER)
         app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
         f = request.files['file']
         filename = secure_filename(f.filename)
         f.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-      	return jsonify({'msg':'success'})
+      	#return jsonify({'msg':'success'})
+        return get_analysis(filename,1)
 
 
 class TestPath(Resource):
