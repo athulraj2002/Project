@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AuthService} from './home/auth.service';
 import {AuthGuard} from './home/auth-guard.service';
+import {AuthGuard2} from './home/auth-guard2.service';
 import {DataFetchService} from './dashboard/data-fetch.service';
 import * as $ from 'jquery';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -86,7 +87,7 @@ import { RecordsComponent } from './faculty/records/records.component';
         NgxUiLoaderModule,
         MatExpansionModule
   ],
-  providers: [AuthService,AuthGuard,DataFetchService],
+  providers: [AuthService,AuthGuard,DataFetchService,AuthGuard2],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
 })

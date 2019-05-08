@@ -7,22 +7,22 @@
         <div class="signup">
           <form [formGroup]="facsignup">
             <mat-form-field>
-                <input matInput placeholder="Enter Faculty ID">
+                <input matInput placeholder="Enter Faculty ID" formControlName="facId">
             </mat-form-field><br>
             <mat-form-field>
-                <input matInput placeholder="Enter Name">
+                <input matInput placeholder="Enter Name" formControlName="facname">
             </mat-form-field><br>
             <mat-form-field>
-              <input matInput placeholder="Enter your email" [formControl]="email" required>
+              <input matInput placeholder="Enter your email" formControlName="facemail" required>
 
             </mat-form-field><br>
 
             <mat-form-field>
-             <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+             <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" formControlName="facpaswd">
              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
            </mat-form-field><br>
 
-           <button type="button" class="btn btn-primary mb-5" name="button">Sign Up</button>
+           <button type="button" class="btn btn-primary mb-5" name="button" [disabled]="!facsignup.valid" (click)="facSignup()">Sign Up</button>
           </form>
 
 
@@ -36,11 +36,12 @@
     </div>
     <div class="row">
       <div class="col-md-6 offset-3">
-        <div class="alert alert-success">
-   <strong>Success!</strong> This alert box could indicate a successful or positive action.
+        <div class="alert alert-success" *ngIf="message=='success'">
+   <strong>Success!</strong> Account Created Successfully
+        <a routerLink="../home">Login Here</a>
  </div>
- <div class="alert alert-danger">
-    <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+ <div class="alert alert-danger" *ngIf="message!='success' && message!='ok' " >
+    <strong>Sorry!</strong> {{message}}
   </div>
 
       </div>
