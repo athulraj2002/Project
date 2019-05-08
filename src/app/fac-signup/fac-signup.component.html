@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6 offset-3">
+        <h4>Sign Up</h4>
+        <div class="signup">
+          <form [formGroup]="facsignup">
+            <mat-form-field>
+                <input matInput placeholder="Enter Faculty ID">
+            </mat-form-field><br>
+            <mat-form-field>
+                <input matInput placeholder="Enter Name">
+            </mat-form-field><br>
+            <mat-form-field>
+              <input matInput placeholder="Enter your email" [formControl]="email" required>
+
+            </mat-form-field><br>
+
+            <mat-form-field>
+             <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+             <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+           </mat-form-field><br>
+
+           <button type="button" class="btn btn-primary mb-5" name="button">Sign Up</button>
+          </form>
+
+
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6 offset-3">
+        <div class="alert alert-success">
+   <strong>Success!</strong> This alert box could indicate a successful or positive action.
+ </div>
+ <div class="alert alert-danger">
+    <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+  </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -10,13 +10,18 @@ import {HomepageComponent} from './dashboard/homepage/homepage.component';
 import {AuthGuard} from './home/auth-guard.service';
 import {FacultyComponent} from './faculty/faculty.component';
 import {FacHomeComponent} from './faculty/fac-home/fac-home.component';
+import {RecordsComponent} from './faculty/records/records.component';
+import {FacSignupComponent} from './fac-signup/fac-signup.component';
 
 
 const routes: Routes = [
+
   {path:'', component:HomeComponent,pathMatch:'full'},
+  {path:'facSignup',component:FacSignupComponent},
   {path: 'faculty',component:FacultyComponent, children:[
     {path:'',redirectTo:'fac-home',pathMatch:'full'},
     {path:'fac-home',component:FacHomeComponent},
+      {path:'records',component:RecordsComponent},
   ]},
   {path:'dashboard',component:DashboardComponent,  children:[
       {path:'forms',component:FormsComponent,canActivate:[AuthGuard]},

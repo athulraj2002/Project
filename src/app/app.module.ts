@@ -12,7 +12,7 @@ import * as $ from 'jquery';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { MatStepperModule, MatInputModule, MatButtonModule, MatAutocompleteModule } from '@angular/material';
+import { MatStepperModule, MatInputModule, MatButtonModule, MatAutocompleteModule, MatIconModule } from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ParticlesComponent } from './particles/particles.component';
 import { LoginComponent } from './login/login.component';
@@ -35,6 +35,10 @@ import { FacNavComponent } from './faculty/fac-nav/fac-nav.component';
 import { FacHomeComponent } from './faculty/fac-home/fac-home.component';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { PredictedComponent } from './dashboard/predicted/predicted.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+import { FacSignupComponent } from './fac-signup/fac-signup.component';
+import { RecordsComponent } from './faculty/records/records.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,8 @@ import { PredictedComponent } from './dashboard/predicted/predicted.component';
     FacNavComponent,
     FacHomeComponent,
     PredictedComponent,
+    FacSignupComponent,
+    RecordsComponent,
 
   ],
   imports: [
@@ -67,8 +73,10 @@ import { PredictedComponent } from './dashboard/predicted/predicted.component';
         MatAutocompleteModule,
         BrowserAnimationsModule,
         MatTabsModule,
+        MatFormFieldModule,
         MatTableModule,
         MatRadioModule,
+        MatIconModule,
         ChartsModule,
         MatCardModule,
         ShowHidePasswordModule,
