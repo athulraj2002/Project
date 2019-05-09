@@ -9,16 +9,18 @@ export class AuthService{
   token: string;
   test: string;
   userData:JSON;
+  gradeData:any;
   private errorData = new BehaviorSubject('ok');
   Error=this.errorData.asObservable();
   private messageSource = new BehaviorSubject('nouploads');
   fileData = this.messageSource.asObservable();
   public fireAuth:firebase.auth.Auth;
  public userProfileRef:firebase.database.Reference;
-
+ public gradeRef:firebase.database.Reference;
  constructor(public http: Http, private router : Router ) {
    this.fireAuth = firebase.auth();
    this.userProfileRef = firebase.database().ref('/userProfile'); //linked to firebase node userProfile
+   this.gradeRef= firebase.database().ref('/Grades');
    console.log('firebasel= link ok');
  }
   signupUser(name: string,admno:string, uniregno: string, email: string, password: string ): Promise<any> {
@@ -69,6 +71,8 @@ export class AuthService{
 
 
   });
+
+
 
 
 
@@ -182,4 +186,12 @@ export class AuthService{
    this.messageSource.next(data);
  }
 
+ fetchGrades(unino:string){
+      this.gradeRef.child('s4-2015-2019').child(unino).on('value', dataSnapshot => {
+        this.gradeData = dataSnapshot.val();
+      });
+ }
+ getGrades(){
+   return this.gradeData;
+ }
 }

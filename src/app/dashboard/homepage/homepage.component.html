@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="name">
-    <h2>Welcome  Name</h2>
+    <h2>Welcome {{userData.name}}</h2>
     <hr>
     </div>
   <div class="container info">
@@ -10,18 +10,20 @@
             <mat-tab label="Personal Info">
                 <div class="row">
                   <div class="col-md-6" style="text-align:left;">
-                    <h6 >name:<span class="tab1">{{userData.name}}</span></h6>
-
-                    <h6>adm no:{{userData.admno}}</h6>
-                    <h6>univ reg no:{{userData.regno}}</h6>
-                    <h6>year:{{userData.batch}}</h6>
-                    <h6>department:CSE</h6>
-
+                    <ul class="list-group" >
+                      <li class="list-group-item"><span class="badge badge-primary">Name:</span>{{userData.name}}</li>
+                      <li class="list-group-item"><span class="badge badge-primary">Admission Number  :</span>{{userData.admno}}</li>
+                      <li class="list-group-item"><span class="badge badge-primary">University No.    :</span>{{userData.regno}}</li>
+                      <li class="list-group-item"><span class="badge badge-primary">Batch             :</span>{{userData.batch}}</li>
+                      <li class="list-group-item"><span class="badge badge-primary">Department        :</span>CSE</li>
+                    </ul>
                   </div>
-                  <div class="col-md-6">
-                    <h6>Current Semester:{{userData.sem}}</h6>
-                    <h6>address:{{userData.address}}</h6>
-                    <h6>contact no:+91{{userData.mob}}</h6>
+                  <div class="col-md-6" style="text-align:left;">
+                    <ul class="list-group" >
+                      <li class="list-group-item"><span class="badge badge-primary">Current Semester  :</span>   {{userData.sem}}</li>
+                      <li class="list-group-item"><span class="badge badge-primary">Address           :</span>   {{userData.address}}</li>
+                      <li class="list-group-item"><span class="badge badge-primary">Contact No        :</span>   +91{{userData.mob}}</li>
+                    </ul>
                   </div>
                 </div>
 
@@ -37,27 +39,22 @@
                 <div class="row">
                   <div class="col-md-4">
                     <h2>{{userData.ptype}}</h2>
+                    <h3>{{individual['TYPE']}}</h3>
                     <img src="assets/img/intj-architect.svg" alt="">
                   </div>
                   <div class="col-md-8">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>{{individual['DESCRIPTION']}}</p>
                          <h4 style="text-align:left;">Career Options</h4>
-                           <mat-accordion>
+                           <mat-accordion *ngFor="let opt of careeropt">
                             <mat-expansion-panel (opened)="panelOpenState = true"
                                                  (closed)="panelOpenState = false">
                               <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                  Self aware panel
+                                  {{opt}}
                                 </mat-panel-title>
-                                <mat-panel-description>
-                                  Currently I am {{panelOpenState ? 'open' : 'closed'}}
-                                </mat-panel-description>
+
                               </mat-expansion-panel-header>
-                              <p>I'm visible because I am open</p>
+                              <p *ngFor="let car of individual['CAREER_OPTION'][opt]">{{car}}</p>
                             </mat-expansion-panel>
                           </mat-accordion>
 
