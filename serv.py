@@ -289,10 +289,22 @@ class Analysis(Resource):
 	#print(analy)
 	return jsonify({'analy':analy})
 
+
+class GetFiles(Resource):
+    def get(self,batch,sem,series):
+        if not (os.path.isdir('upload/'+batch+'/'+sem+'/'+series)):
+            return 'no_files'
+        elif(len(os.listdir('upload/'+batch+'/'+sem+'/'+series) ) == 0):
+            return 'no_files'
+        else:
+            return os.listdir('upload/'+batch+'/'+sem+'/'+series)
+
+
 api.add_resource(TestPath, '/test') # Route_1
 api.add_resource(PredictType, '/predict/<int:c1>/<int:c2>/<int:c3>/<int:c4>/<int:c5>/')
 api.add_resource(Analysis, '/analysis/<unino>')
 api.add_resource(Upload, '/upload/<batch>/<sem>/<series>')
+api.add_resource(GetFiles, '/getfile/<batch>/<sem>/<series>')
 
 if __name__ == '__main__':
    app.run(port=5002)
