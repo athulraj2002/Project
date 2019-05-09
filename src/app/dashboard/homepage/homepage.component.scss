@@ -80,3 +80,11 @@ mat-expansion-panel{
 .list-group-item{
   background-color: #49505799;
 }
+.mat-ink-bar{
+  height: 5px !important;
+border-top-left-radius: 20px !important;
+border-top-right-radius: 20px !important;
+}
+.list-group{
+  text-transform: uppercase;
+}
