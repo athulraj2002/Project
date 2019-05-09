@@ -23,6 +23,7 @@ export class ResultViewComponent implements OnInit {
 
   forGetFile:FormGroup;
   fromGetFile:any;
+  fromGetFileData:any;
   Series:semesters[]=[
     {value:'first'},
     {value:'second'}
@@ -61,6 +62,7 @@ export class ResultViewComponent implements OnInit {
 
   constructor(private authService:AuthService,private http: HttpClient,private _formBuilder: FormBuilder) {
     this.fromGetFile="ok";
+    this.fromGetFileData="ok";
   this.results=this.authService.getUserData()['analysis'];
   console.log(this.results);
   this.myob=Object.keys(this.results);
@@ -97,6 +99,22 @@ export class ResultViewComponent implements OnInit {
 
     });
 
+  }
+  showAnaly(filename:string){
+    let filePut2=this.authService.getUserData();
+    this.http.get('http://127.0.0.1:5002/analysis/'+filePut2['regno']+'/'+filename).subscribe((val) => {
+
+      this.fromGetFileData=val;
+      //this.authService.updateAnaly2(this.fromGetFileData['analy'],this.forGetFile.value.seriesNum,this.fromGetFileData['subname']);
+
+    });
+
+    //this.authService.updateAnaly2(this.fromGetFileData['analy'],this.forGetFile.value.seriesNum,this.fromGetFileData['subname']);
+
+  }
+  saveAnalysis(){
+    console.log(this.fromGetFileData);
+    this.authService.updateAnaly2(this.fromGetFileData['analy'],this.forGetFile.value.seriesNum,this.fromGetFileData['subname']);
   }
 
 }

@@ -15,7 +15,7 @@
   <div class="container">
     <br><br>
     <h2 *ngIf="!message['passed']">Upload Series Mark file from nav-bar</h2>
-    <h4 *ngIf="message['passed']">Series 1</h4>
+    <h4 *ngIf="message['passed']">Series{{message['series']}}</h4>
     <h6 *ngIf="message['passed']">{{message['course_name']}}</h6>
     <div class="row">
 

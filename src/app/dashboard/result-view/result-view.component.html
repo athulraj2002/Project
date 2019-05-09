@@ -7,7 +7,7 @@
               <div class="col-md-6 offset-md-3">
                 <form [formGroup]="forGetFile">
                 <mat-form-field >
-                  <mat-label>Subjects</mat-label>
+                  <mat-label>Series</mat-label>
                   <mat-select formControlName="seriesNum">
                     <mat-option *ngFor="let serie of Series" [value]="serie.value" >
                       {{serie.value}}
@@ -24,9 +24,16 @@
                             <h4>Sorry,No uploads from faculty</h4>
                 </div>
                 <div class="row" *ngIf="fromGetFile!='ok' && fromGetFile!='no_files'">
-                    <button type="button" name="button" class="btn btn-primary" *ngFor="let item of fromGetFile">
+                    <button type="button" name="button" class="btn btn-primary" *ngFor="let item of fromGetFile" (click)="showAnaly(item)">
                           {{item}}
                     </button>
+                </div>
+                <div class="row" *ngIf="fromGetFileData!='ok'">
+                  <div class="backcard">
+                      <p [innerHTML]="fromGetFileData['analy']"></p><br>
+                      <button type="button" name="button8" (click)="saveAnalysis()">Save Analysis</button>
+                  </div>
+
                 </div>
 
 

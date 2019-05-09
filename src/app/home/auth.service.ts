@@ -165,6 +165,18 @@ export class AuthService{
    });
  }
 
+ updateAnaly2(ana:string,series:string,subname:string){
+   let path:String=this.userData['sem']+'_'+series;
+   this.userProfileRef.child(this.fireAuth.currentUser.uid).child('analysis').update({
+     [path+"/res/"+subname]:ana,
+     [path+"/series"]:series,
+     [path+"/sem"]:this.userData['sem']
+   },function(error){
+     if(error) console.log(error);
+     else console.log('success ana update');
+   });
+ }
+
 
  filedata(data:any){
    this.messageSource.next(data);
