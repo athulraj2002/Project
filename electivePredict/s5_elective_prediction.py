@@ -10,7 +10,7 @@ def elective_pred(marks,elective1,elective2,course_code1,course_code2):
     soft_computing = pd.read_csv('soft_computing_data.csv')
     soft_computing.dropna(subset=['CS361'], inplace=True)
 
-    X = soft_computing.iloc[:, 1:9].values
+    X = soft_computing.iloc[:, 1:7].values
     y = soft_computing.iloc[:, -1].values
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
 
@@ -23,7 +23,7 @@ def elective_pred(marks,elective1,elective2,course_code1,course_code2):
     clf.fit(X_train,y_train)
 
     y_pred=clf.predict(X_test)
-    res1=clf.predict(marks)
+    res1=clf.predict([marks])
 
     #Import scikit-learn metrics module for accuracy calculation
     from sklearn import metrics
@@ -33,7 +33,7 @@ def elective_pred(marks,elective1,elective2,course_code1,course_code2):
     optimisation_techniques = pd.read_csv('optimisation_data.csv')
     optimisation_techniques.dropna(subset=['CS365'], inplace=True)
 
-    X = optimisation_techniques.iloc[:, 1:9].values
+    X = optimisation_techniques.iloc[:, 1:7].values
     y = optimisation_techniques.iloc[:, -1].values
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15, random_state=42)
 
@@ -48,7 +48,7 @@ def elective_pred(marks,elective1,elective2,course_code1,course_code2):
     y_pred=clf.predict(X_test)
 
     print(X_test)
-    res2=clf.predict(marks)
+    res2=clf.predict([marks])
     print(y_pred)
     print(y_test)
 
@@ -80,6 +80,6 @@ def elective_pred(marks,elective1,elective2,course_code1,course_code2):
     
     return recommendation
 
-prediction = elective_pred([[8,7,7,6,5,6,6,10]],'Soft Computing','Optimisation Techniques','CS361','CS365')
+prediction = elective_pred([8,7,7,6,5,6],'Soft Computing','Optimisation Techniques','CS361','CS365')
 
 print(prediction)
