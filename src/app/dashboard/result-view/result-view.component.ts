@@ -5,7 +5,13 @@ import { Component, OnInit } from '@angular/core';
  import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
  import * as pluginDataLabels from 'chartjs-plugin-datalabels';
  import { Label } from 'ng2-charts';
+ import {FormBuilder, FormGroup, Validators,ReactiveFormsModule,FormsModule} from '@angular/forms';
  import {AuthService} from '../../home/auth.service';
+ import {HttpClientModule, HttpClient, HttpRequest, HttpResponse, HttpEventType} from '@angular/common/http';
+
+ export interface semesters{
+   value:string;
+ };
 
  export interface semesters{
    value:string;
@@ -19,15 +25,12 @@ import { Component, OnInit } from '@angular/core';
 export class ResultViewComponent implements OnInit {
   results;myob;subs=[];Ress;courses;semm:string="kr";seer:string="khsdgf";
 
-  Semester:semesters[]=[
-    {value:'s1'},
-    {value:'s2'},
-    {value:'s3'},
-    {value:'s4'},
-    {value:'s5'},
-    {value:'s6'},
-    {value:'s7'},
-    {value:'s8'}
+  forGetFile:FormGroup;
+  fromGetFile:any;
+  fromGetFileData:any;
+  Series:semesters[]=[
+    {value:'first'},
+    {value:'second'}
   ];
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -61,8 +64,9 @@ export class ResultViewComponent implements OnInit {
 
 
 
-  constructor(private authService:AuthService) {
-
+  constructor(private authService:AuthService,private http: HttpClient,private _formBuilder: FormBuilder) {
+    this.fromGetFile="ok";
+    this.fromGetFileData="ok";
   this.results=this.authService.getUserData()['analysis'];
   console.log(this.results);
   this.myob=Object.keys(this.results);
@@ -76,6 +80,10 @@ export class ResultViewComponent implements OnInit {
 }
 
   ngOnInit() {
+
+    this.forGetFile=this._formBuilder.group(
+      {seriesNum:['',Validators.required]
+    });
   }
   setRes(res:any){
       this.semm=res.sem;
@@ -84,6 +92,33 @@ export class ResultViewComponent implements OnInit {
       this.courses=Object.keys(this.Ress['res']);
       console.log(this.Ress['sem']);
 
+  }
+
+  getfilelist(){
+    let filePut=this.authService.getUserData();
+    this.http.get('http://127.0.0.1:5002/getfile/'+filePut['batch']+'/'+filePut['sem']+'/'+this.forGetFile.value.seriesNum).subscribe((val) => {
+
+      this.fromGetFile=val;
+
+
+    });
+
+  }
+  showAnaly(filename:string){
+    let filePut2=this.authService.getUserData();
+    this.http.get('http://127.0.0.1:5002/analysis/'+filePut2['regno']+'/'+filename).subscribe((val) => {
+
+      this.fromGetFileData=val;
+      //this.authService.updateAnaly2(this.fromGetFileData['analy'],this.forGetFile.value.seriesNum,this.fromGetFileData['subname']);
+
+    });
+
+    //this.authService.updateAnaly2(this.fromGetFileData['analy'],this.forGetFile.value.seriesNum,this.fromGetFileData['subname']);
+
+  }
+  saveAnalysis(){
+    console.log(this.fromGetFileData);
+    this.authService.updateAnaly2(this.fromGetFileData['analy'],this.forGetFile.value.seriesNum,this.fromGetFileData['subname']);
   }
 
 }

@@ -2,18 +2,25 @@ import * as firebase from 'firebase';
 import {Http} from '@angular/http';
 import {Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthService{
   token: string;
   test: string;
   userData:JSON;
+  gradeData:any;
+  private errorData = new BehaviorSubject('ok');
+  Error=this.errorData.asObservable();
+  private messageSource = new BehaviorSubject('nouploads');
+  fileData = this.messageSource.asObservable();
   public fireAuth:firebase.auth.Auth;
  public userProfileRef:firebase.database.Reference;
-
+ public gradeRef:firebase.database.Reference;
  constructor(public http: Http, private router : Router ) {
    this.fireAuth = firebase.auth();
    this.userProfileRef = firebase.database().ref('/userProfile'); //linked to firebase node userProfile
+   this.gradeRef= firebase.database().ref('/Grades');
    console.log('firebasel= link ok');
  }
   signupUser(name: string,admno:string, uniregno: string, email: string, password: string ): Promise<any> {
@@ -33,6 +40,25 @@ export class AuthService{
 
       );
   }
+
+  signupUserFaculty(name: string,facid:string,email: string, password: string ): Promise<any> {
+    return this.fireAuth.createUserWithEmailAndPassword(email, password).then( newUser => {
+      this.userProfileRef.child(this.fireAuth.currentUser.uid).set({
+        name: name,
+        facid:facid,
+        email:email,
+        usertype:'faculty'
+      });
+      this.errorData.next('success');
+    })
+    .catch(
+        error => this.errorData.next(error)
+
+
+      );
+
+
+  }
   signinUser(email: string, password: string) {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -46,14 +72,22 @@ export class AuthService{
 
   });
 
+
+
+
+
+
           this.userProfileRef.child(this.fireAuth.currentUser.uid).child('test').on('value', dataSnapshot => {
 
             this.test = dataSnapshot.val();
             console.log(this.test);
-              if(this.test == 'not_taken')
+              if(this.test==null)
+                    this.router.navigate(['/faculty']);
+            else if(this.test == 'not_taken')
                   this.router.navigate(['/dashboard/taketest']);
               else
                   this.router.navigate(['/dashboard']);
+
 
   });  //console.log(this.userProfileRef.child(firebase.auth().currentUser.uid));
 
@@ -107,8 +141,13 @@ export class AuthService{
   }
 
   isAuthenticated() {
-   return this.token != null;
+   return (this.token != null&&this.test!=null);
  }
+
+ isFaculty() {
+  return (this.token != null&&this.test==null);
+ }
+
  TestTaken() {
    return this.test == 'taken' ;
  }
@@ -130,4 +169,29 @@ export class AuthService{
    });
  }
 
+ updateAnaly2(ana:string,series:string,subname:string){
+   let path:String=this.userData['sem']+'_'+series;
+   this.userProfileRef.child(this.fireAuth.currentUser.uid).child('analysis').update({
+     [path+"/res/"+subname]:ana,
+     [path+"/series"]:series,
+     [path+"/sem"]:this.userData['sem']
+   },function(error){
+     if(error) console.log(error);
+     else console.log('success ana update');
+   });
+ }
+
+
+ filedata(data:any){
+   this.messageSource.next(data);
+ }
+
+ fetchGrades(unino:string){
+      this.gradeRef.child('s4-2015-2019').child(unino).on('value', dataSnapshot => {
+        this.gradeData = dataSnapshot.val();
+      });
+ }
+ getGrades(){
+   return this.gradeData;
+ }
 }

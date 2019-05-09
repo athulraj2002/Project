@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-  <a class="navbar-brand" >
+  <a class="navbar-brand"routerLink="/faculty/" >
     Home
   </a>
 
@@ -23,6 +23,10 @@
       </li>
       <li class="nav-item">
         <a class="nav-link"  >Feedback</a>
+
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/faculty/records" >Records</a>
 
       </li>
 
@@ -82,7 +86,7 @@
       <p>{{upMsg}}</p>
       <div class="modal-footer">
 
-        <button type="button" name="button" class="btn btn-primary" (click)="uploadFunc();">Upload</button>
+        <button type="button" name="button" class="btn btn-primary" (click)="uploadFunc();basicModal.hide();">Upload</button>
       </div>
     </div>
   </div>

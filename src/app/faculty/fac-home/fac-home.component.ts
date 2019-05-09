@@ -3,7 +3,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { Label } from 'ng2-charts';
+import { Label,MultiDataSet } from 'ng2-charts';
+import {AuthService} from '../../home/auth.service';
 
 @Component({
   selector: 'app-fac-home',
@@ -12,14 +13,14 @@ import { Label } from 'ng2-charts';
 })
 export class FacHomeComponent implements OnInit {
 
-
+  message;
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{ticks:{
         fontColor:'white'
     }}], yAxes: [{     ticks: {
-          max : 100,
+          max : 70,
           min : 0,
           fontColor: 'white'
 
@@ -39,7 +40,14 @@ export class FacHomeComponent implements OnInit {
   }
 
   };
-  public barChartLabels: Label[] = ['sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6'];
+
+  public doughnutChartLabels: Label[] = ['pass','fail'];
+ public doughnutChartData: MultiDataSet = [
+   [350, 450, 100]
+ ];
+ public doughnutChartType: ChartType = 'doughnut';
+
+  public barChartLabels: Label[] = ['0-10', '10-20', '20-30', '30-40', '40-50','50-60'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [pluginDataLabels];
@@ -60,9 +68,16 @@ export class FacHomeComponent implements OnInit {
   }
   ]
 
-  constructor() { }
+  constructor(private authservice:AuthService) {
+
+
+  }
 
   ngOnInit() {
+    this.authservice.fileData.subscribe(message => this.message = message);
+    console.log(this.message);
+    //this.barChartData=[{data:this.message['total_mark_distrib'],label:'distribution'}];
+
   }
 
 }

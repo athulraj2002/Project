@@ -3,6 +3,7 @@ import {HttpClientModule, HttpClient, HttpRequest, HttpResponse, HttpEventType} 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormBuilder, FormGroup, Validators,ReactiveFormsModule,FormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import {AuthService} from '../../home/auth.service';
 
 export interface semesters{
   value:string;
@@ -94,7 +95,7 @@ export class FacNavComponent implements OnInit {
     });
   }
 
-  constructor(private http: HttpClient,private _formBuilder: FormBuilder) { }
+  constructor(private http: HttpClient,private _formBuilder: FormBuilder,private authservice:AuthService ) { }
 
 
 
@@ -133,7 +134,10 @@ export class FacNavComponent implements OnInit {
     this.http.post('http://127.0.0.1:5002/upload/'+options.batch+'/'+options.sem+'/'+options.series, this.formData).subscribe((val) => {
 
       console.log(val);
-      this.upMsg=val['msg'];
+      this.authservice.filedata(val);
+      this.upMsg="success";
+
     });
+
   }
 }

@@ -14,6 +14,11 @@
   color: white;
 
 }
+.badge-primary{
+  margin-right: 20px;
+  padding: 5px;
+  background-color: #2493c0!important;
+}
 .container{
   margin: 50px auto;
   background-color: #343a40;
@@ -69,4 +74,9 @@ canvas{
 }
 mat-expansion-panel{
   background-color: #495057 !important;
+}
+
+
+.list-group-item{
+  background-color: #49505799;
 }
