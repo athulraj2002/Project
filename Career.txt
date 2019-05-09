@@ -103,7 +103,8 @@ ISTP:{
           Management:["Fashion Merchandising"]
       }
  },
- ISFP:{
+ ADVENTURER:{
+	type:"ISFP"
       description:"ISFPs often find themselves in occupations that involve communication with customers or occupations that require a good sense of aesthetics such as: customer support roles, store sales associate roles (where aggressive selling is not required). Child care is a favorable area for ISFPs. Working with data and spreadsheets is also suitable. ISFPs are able to realize their aesthetic abilities in art, design, and creative media companies.",
 	    career_option:{
           VisualArtsAndMedia:["Graphics Design and Multimedia","Interior Design","Artist/Animator","Fashion Designer"],
@@ -121,6 +122,7 @@ ISTP:{
       }
  },
  INFP:{
+		
       description:"Overall, INFPs are effective in occupations involving a lot of intellectual work that is focused on the humanities and social sciences, the spirit and soul, inspirational activities, and those that require creativity. Social workers, psychologists, life coaches, addiction rehab counselors, mental and community care staff, elementary education, teaching, and creative script writing are just some of the examples of suitable occupations for INFPs. They are also successful in academia thanks to their intellectual strength.",
 	    career_option:{
           SocialService:["Counselling","Education"],
