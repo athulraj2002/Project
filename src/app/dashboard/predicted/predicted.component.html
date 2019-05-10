@@ -58,14 +58,50 @@
     </div>
 
   </div>-->
-
+<br><br>
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-        
+      <form  [formGroup]="projectGroupPredict">
+      <mat-card>
+            <h4>Intrested to Work in:</h4>
+            <ul class="list-group">
+              <li class="list-group-item" *ngIf="intrestValue" >{{intrestValue}} <mat-icon style="float:right;" (click)="edit=!edit;">edit</mat-icon></li>
+              <li class="list-group-item" *ngIf="!intrestValue || edit">
+                <mat-form-field >
+                    <input matInput placeholder="Your Intrests" formControlName="intrests">
+                    <mat-hint align="start"><strong>eg:Machine Learning,Image Processing</strong> </mat-hint>
+                </mat-form-field><br>
+              </li>
+            </ul>
+            <br>
+            <h4>Your Expertise:</h4>
+            <ul class="list-group">
+              <li class="list-group-item" *ngIf="expertiseValue" >{{expertiseValue}} <mat-icon style="float:right;" (click)="edit2=!edit2;">edit</mat-icon></li>
+              <li class="list-group-item" *ngIf="!expertiseValue || edit2">
+                <mat-form-field >
+                    <mat-label>Your Expertise</mat-label>
+                    <mat-select formControlName="EXpertise">
+                      <mat-option *ngFor="let exp of Expertise" [value]="exp.value">
+                        {{exp.value}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </li>
+            </ul>
+            <br>
+            <button type="button" class="btn btn-primary" name="button89" *ngIf="edit || edit2" (click)="updateIntrExper()">Submit</button>
+      </mat-card>
+
+      </form>
     </div>
     <div class="col-md-6">
-
+      <mat-card>
+        <h4>Your Intrests:</h4>
+        <ul class="list-group">
+          <li class="list-group-item">lkgjhklf</li>
+        </ul>
+      </mat-card>
     </div>
 
   </div>

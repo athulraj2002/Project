@@ -194,4 +194,25 @@ export class AuthService{
  getGrades(){
    return this.gradeData;
  }
+ updateIntrExperFirbase(key:string,value:string){
+   this.userProfileRef.child(this.fireAuth.currentUser.uid).update(
+     {
+       [key]:value
+     },function(error){
+       if(error) console.log(error);
+       else console.log('success intrest/expertise update');
+     });
+
+ }
+ updateIntrExperFirbase2(intre:string,expert:string){
+   this.userProfileRef.child(this.fireAuth.currentUser.uid).update(
+     {
+       'intrests':intre,
+       'expertise':expert
+     },function(error){
+       if(error) console.log(error);
+       else console.log('success intrest&expertise update');
+     });
+ }
+
 }
