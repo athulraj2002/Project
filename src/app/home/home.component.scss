@@ -14,6 +14,7 @@
 }
 .row,.container,.container-fluid{
   text-align: center;
+  padding: 0px;
 
 }
 .logo{
@@ -118,3 +119,61 @@ transform-origin: 100% 100%; }
 .form-dark .modal-header {
 border-bottom: none;
 }
+.one{
+		background-image: url('../../assets/img/bg.jpg');
+		  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+	}
+	section{
+
+		text-align: center;
+
+	}
+	.icons{
+		font-size: 16vh !important;
+		padding-bottom: 50px;
+		padding-top: 15px;
+	}
+	h1{
+		padding-top: 100px;
+		padding-bottom: 70px;
+	}
+	.one{
+		background-color: #2493c0b5;
+		color: white;
+	}
+	img{
+		width: 500px;
+		padding-bottom: 100px;
+
+	}
+	.cards{
+		        border-radius: 50%;
+		        width: 200px;
+		        height: 200px;
+    padding: 30px;
+    background-color: #ffffff;
+    color: #2493c0;
+    margin: 0px auto;
+}
+	.five{
+		background-color: white;
+		}
+	.three{
+
+		background-image: url('../../assets/img/features.jpg');
+	 background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+	}
+	.title{
+		    padding: 10px;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 10px;
+    width: 80%;
+    margin:10px auto;
+	}

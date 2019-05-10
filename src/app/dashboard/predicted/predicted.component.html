@@ -128,7 +128,13 @@
       </mat-card>
       </form>
     </div>
-
+   <div *ngIf="check()=='done'">
+      <div *ngFor="let a of GroupList">
+        <h4>{{a['name']}}</h4>
+        <h4>{{a['intrest']}}</h4>
+        <h4>{{a['gpa']}}</h4>
+      </div>
+    </div>
   </div>
 
 </div>

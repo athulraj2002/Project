@@ -6,11 +6,15 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthService{
-  studentsByGpa:any;
+
   token: string;
   test: string;
   userData:JSON;
   gradeData:any;
+  private lsitOfstudents = new BehaviorSubject('ok');
+  resultObject=this.lsitOfstudents.asObservable();
+  private gpadata = new BehaviorSubject('ok');
+  studentsByGpa=this.gpadata.asObservable();
   private errorData = new BehaviorSubject('ok');
   Error=this.errorData.asObservable();
   private messageSource = new BehaviorSubject('nouploads');
@@ -223,17 +227,48 @@ export class AuthService{
 
      this.userData = dataSnapshot.val();
 
-
    });
  }
-
- projectGroupByGPA(gpa:number){
+intermediate:any;
+res:any[]=[];
+ projectGroupByGPA(gpa:number,intrest:string,expertise:string){
+        this.res=[];
       this.gpaRef.orderByChild('overall').startAt(gpa).on('value',dataSnapshot=>{
-            this.studentsByGpa=dataSnapshot.val();
-            console.log(dataSnapshot.val());
-      });
-      console.log(this.gpaRef);
+            this.gpadata.next(dataSnapshot.val());
+            if(dataSnapshot.val()==null) this.lsitOfstudents.next('null');
+            else{
+                  let regnos=Object.keys(dataSnapshot.val());
+                  this.userProfileRef.orderByChild('expertise').equalTo(expertise).on('value',dataSnapshot2=>{
+                  this.intermediate=dataSnapshot2.val();
+                  if(dataSnapshot2.val()==null)  this.lsitOfstudents.next('null');
+                  else{
+                    let keys=Object.keys(this.intermediate);
+                    this.res=[];
+                    for (let a of keys){
+                    if(this.intermediate[a]['intrests'].includes(intrest) && regnos.includes(this.intermediate[a]['regno']) && this.userData['regno']!=this.intermediate[a]['regno']){
+                          let data={
+                            name:this.intermediate[a]['name'],
+                            intrest:this.intermediate[a]['intrests'],
+                            gpa:dataSnapshot.val()[this.intermediate[a]['regno']]['overall']
 
- }
+                        }
+                          this.res.push(data);
+                    }
+                  }
+                  this.lsitOfstudents.next(JSON.stringify(this.res));
+                }
+
+            });
+
+          }
+
+      });
+
+  }
+  getRes(){
+    return this.res;
+  }
+
+
 
 }

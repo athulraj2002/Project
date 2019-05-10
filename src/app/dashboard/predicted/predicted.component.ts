@@ -15,6 +15,7 @@ export interface expertise{
 })
 export class PredictedComponent implements OnInit {
   ElectiveData:any;
+  GroupList:any;
   userData:any;
   intrestValue:string;expertiseValue:string;
   divopen:boolean=false;
@@ -27,8 +28,10 @@ export class PredictedComponent implements OnInit {
   ];
   projectGroupPredict:FormGroup;
   forGroupSearch:FormGroup;
+  gpaList:any;
   edit:boolean=false;
   edit2:boolean=false;
+  resultByExpertise:any;
   constructor(private http: HttpClient,private authservice:AuthService,private _formBuilder: FormBuilder ) { }
 
   updateForProjectPrediction(){
@@ -55,7 +58,8 @@ export class PredictedComponent implements OnInit {
       EXpertiseForSearch:['',Validators.required],
       GPAForSearch:['',Validators.required]
     });
-
+      this.authservice.studentsByGpa.subscribe(message => this.gpaList = message);
+      this.authservice.resultObject.subscribe(message=>this.resultByExpertise=message);
 
   }
   getElective() {
@@ -85,8 +89,22 @@ export class PredictedComponent implements OnInit {
     this.edit=false;
     this.edit2=false;
   }
+
   getMembers(){
     let projSrchData=this.forGroupSearch.value;
-    this.authservice.projectGroupByGPA(Number(projSrchData.GPAForSearch));
+    this.authservice.projectGroupByGPA(Number(projSrchData.GPAForSearch),projSrchData.intrestForSearch,projSrchData.EXpertiseForSearch);
   }
+  check(){
+    if(this.resultByExpertise=='ok' || this.resultByExpertise=='null')
+    return 'wait';
+    else if(this.resultByExpertise=="[]")
+    return 'nodata';
+    else{
+      this.GroupList=this.authservice.res;
+      return 'done';
+    }
+
+  }
+
+
 }
