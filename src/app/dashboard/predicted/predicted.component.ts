@@ -26,11 +26,12 @@ export class PredictedComponent implements OnInit {
     {value:'Documentation'}
   ];
   projectGroupPredict:FormGroup;
+  forGroupSearch:FormGroup;
   edit:boolean=false;
   edit2:boolean=false;
   constructor(private http: HttpClient,private authservice:AuthService,private _formBuilder: FormBuilder ) { }
 
-  ngOnInit() {
+  updateForProjectPrediction(){
     this.userData=this.authservice.getUserData();
     if (this.userData['intrests'])
         this.intrestValue=this.userData['intrests'];
@@ -38,11 +39,21 @@ export class PredictedComponent implements OnInit {
     if(this.userData['expertise'])
         this.expertiseValue=this.userData['expertise'];
     else  this.edit2=true;
+  }
+
+  ngOnInit() {
+      this.updateForProjectPrediction();
 
 
     this.projectGroupPredict=this._formBuilder.group({
       intrests:[''],
       EXpertise:['']
+    });
+
+    this.forGroupSearch=this._formBuilder.group({
+      intrestForSearch:['',Validators.required],
+      EXpertiseForSearch:['',Validators.required],
+      GPAForSearch:['',Validators.required]
     });
 
 
@@ -68,8 +79,14 @@ export class PredictedComponent implements OnInit {
             this.authservice.updateIntrExperFirbase('intrests',formData.intrests);
     }
     else if(this.edit2){
-            this.authservice.updateIntrExperFirbase2('expertise',formData.EXpertise);
+            this.authservice.updateIntrExperFirbase('expertise',formData.EXpertise);
     }
+    this.updateForProjectPrediction();
+    this.edit=false;
+    this.edit2=false;
   }
-
+  getMembers(){
+    let projSrchData=this.forGroupSearch.value;
+    this.authservice.projectGroupByGPA(Number(projSrchData.GPAForSearch));
+  }
 }

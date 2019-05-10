@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthService{
+  studentsByGpa:any;
   token: string;
   test: string;
   userData:JSON;
@@ -17,10 +18,12 @@ export class AuthService{
   public fireAuth:firebase.auth.Auth;
  public userProfileRef:firebase.database.Reference;
  public gradeRef:firebase.database.Reference;
+ public gpaRef:firebase.database.Reference;
  constructor(public http: Http, private router : Router ) {
    this.fireAuth = firebase.auth();
    this.userProfileRef = firebase.database().ref('/userProfile'); //linked to firebase node userProfile
    this.gradeRef= firebase.database().ref('/Grades');
+   this.gpaRef=firebase.database().ref('/StudentGPA2015-2019');
    console.log('firebasel= link ok');
  }
   signupUser(name: string,admno:string, uniregno: string, email: string, password: string ): Promise<any> {
@@ -213,6 +216,24 @@ export class AuthService{
        if(error) console.log(error);
        else console.log('success intrest&expertise update');
      });
+     this.refreshAll();
+ }
+ refreshAll(){
+   this.userProfileRef.child(this.fireAuth.currentUser.uid).on('value', dataSnapshot => {
+
+     this.userData = dataSnapshot.val();
+
+
+   });
+ }
+
+ projectGroupByGPA(gpa:number){
+      this.gpaRef.orderByChild('overall').startAt(gpa).on('value',dataSnapshot=>{
+            this.studentsByGpa=dataSnapshot.val();
+            console.log(dataSnapshot.val());
+      });
+      console.log(this.gpaRef);
+
  }
 
 }
