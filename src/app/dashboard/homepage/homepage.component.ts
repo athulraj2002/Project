@@ -404,6 +404,7 @@ anaRe;analy;
 
   userData:JSON;
   careeropt:any;
+  studentGPA:any;
   constructor(private authservice:AuthService,private httpClient:HttpClient) {
     this.userData=this.authservice.getUserData();
     this.individual=this.MbtData[this.userData['ptype']];
@@ -417,14 +418,20 @@ anaRe;analy;
   }
 
   ngOnInit() {
+    this.authservice.GpaofStudent.subscribe(message=>{
+      this.studentGPA=message;
+      this.lineChartLabels=Object.keys(this.studentGPA);
+      this.lineChartLabels.pop();
+      var dataArray=Object.values(this.studentGPA);
+      dataArray=dataArray.map(Number);
+      dataArray.pop();
+      this.lineChartData=[
+        {data:dataArray,label:'GPA'}
+      ];
 
+    });
     this.authservice.fetchGrades(this.userData['regno']);
-    this.lineChartLabels=Object.keys(this.userData['GPA']);
-    var dataArray=Object.values(this.userData['GPA']);
-    dataArray=dataArray.map(Number);
-    this.lineChartData=[
-      {data:dataArray,label:'GPA'}
-    ];
+
 
 
 

@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   loginform : FormGroup;
   serverData: JSON;
   employeeData: JSON;
+  errorLogin;
+  errorSignup;
 
 //  mailId = new FormControl('', [Validators.email,Validators.required]);
 //  passwd1 = new FormControl('', Validators.required);
@@ -30,6 +32,10 @@ export class HomeComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,private authService:AuthService,private httpClient: HttpClient, private ngxLoader: NgxUiLoaderService) { }
 
   ngOnInit() {
+
+      this.authService.ErrorLogin.subscribe(message => this.errorLogin = message);
+      this.authService.ErrorSignup.subscribe(message => this.errorSignup = message);
+
       this.signupform = this._formBuilder.group({
         mailId: ['',[Validators.email,Validators.required]],
         passwd1:['',[Validators.required,Validators.minLength(6)]],

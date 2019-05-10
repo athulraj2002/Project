@@ -11,6 +11,12 @@ export class AuthService{
   test: string;
   userData:JSON;
   gradeData:any;
+  private gpaStudent = new BehaviorSubject('ok');
+  GpaofStudent=this.gpaStudent.asObservable();
+  private errorDatalogin = new BehaviorSubject('ok');
+  ErrorLogin=this.errorDatalogin.asObservable();
+  private errorDataSignup = new BehaviorSubject('ok');
+  ErrorSignup=this.errorDataSignup.asObservable();
   private lsitOfstudents = new BehaviorSubject('ok');
   resultObject=this.lsitOfstudents.asObservable();
   private gpadata = new BehaviorSubject('ok');
@@ -40,9 +46,10 @@ export class AuthService{
         test:'not_taken',
         analysis:''
       });
+      this.errorDataSignup.next('success');
     })
     .catch(
-        error => console.log(error)
+        error => this.errorDataSignup.next(error)
 
 
       );
@@ -75,6 +82,13 @@ export class AuthService{
           this.userProfileRef.child(this.fireAuth.currentUser.uid).on('value', dataSnapshot => {
 
             this.userData = dataSnapshot.val();
+            this.gpaRef.child(this.userData['regno']).on('value', dataSnapshot3 => {
+
+              this.gpaStudent.next(dataSnapshot3.val());
+
+
+
+    });
 
 
   });
@@ -99,14 +113,17 @@ export class AuthService{
   });  //console.log(this.userProfileRef.child(firebase.auth().currentUser.uid));
 
 
+
           firebase.auth().currentUser.getIdToken()
             .then(
               (token: string) => this.token = token
             )
+
+            this.errorDatalogin.next('success');
         }
       )
       .catch(
-        error => console.log(error)
+        error => this.errorDatalogin.next(error)
               );
 
   }
@@ -270,7 +287,9 @@ res:any[]=[];
   getRes(){
     return this.res;
   }
-
+  getGPAofStudent(){
+    return this.GpaofStudent;
+  }
 
 
 }

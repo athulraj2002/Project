@@ -95,6 +95,20 @@
               <div class="text-center mb-3 col-md-12">
                 <button type="submit"  [disabled]="!signupform.valid" (click)="onSignup();" mdbBtn color="success" block="true"  class="z-depth-1 waves-light signupbtn"
                   mdbWavesEffect>Sign up</button>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-6 offset-3">
+                      <div class="alert alert-success" *ngIf="errorSignup=='success'">
+                 <strong>Success!</strong> Account Created Successfully
+                      <br>Please Login
+               </div>
+               <div class="alert alert-danger" *ngIf="errorSignup!='success' && errorSignup!='ok' " >
+                  <strong>Sorry!</strong> {{errorSignup}}
+                </div>
+
+                    </div>
+
+                  </div>
               </div>
 
               <!--Grid column-->
@@ -175,6 +189,20 @@
                 <div class="text-center mb-3 col-md-12">
                   <button type="button" mdbBtn color="success" [disabled]="!loginform.valid" (click)="onSignin();" block="true"  class="z-depth-1 waves-light signupbtn"
                     mdbWavesEffect>Login</button>
+                    <br>
+                    <div class="row">
+                      <div class="col-md-6 offset-3">
+                        <div class="alert alert-success" *ngIf="errorLogin=='success'">
+                   <strong>Success!</strong> Logged In .Please Wait
+                        
+                 </div>
+                 <div class="alert alert-danger" *ngIf="errorLogin!='success' && errorLogin!='ok' " >
+                    <strong>Sorry!</strong> {{errorLogin}}
+                  </div>
+
+                      </div>
+
+                    </div>
                 </div>
                 <!--Grid column-->
 
