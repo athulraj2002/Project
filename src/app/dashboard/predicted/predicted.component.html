@@ -128,15 +128,31 @@
       </mat-card>
       </form>
     </div>
-   <div *ngIf="check()=='done'">
-      <div *ngFor="let a of GroupList">
-        <h4>{{a['name']}}</h4>
-        <h4>{{a['intrest']}}</h4>
-        <h4>{{a['gpa']}}</h4>
-      </div>
+    <div class="container" *ngIf="resultByExpertise=='null'">
+      <br><br>
+      <h4 >No Matching Member Found</h4>
     </div>
-  </div>
 
+  </div>
+  <div class="container" *ngIf="resultByExpertise!='null' && resultByExpertise!='ok'">
+    <h4 style="color:white;">Matching Members</h4>
+    <table class="table table-striped" style="background-color:#f8f9fae0;border-radius:5px;">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Intrests</th>
+        <th>GPA</th>
+      </tr>
+      </thead>
+       <tbody>
+         <tr *ngFor="let a of getList()">
+           <td>{{a['name']}}</td>
+           <td>{{a['intrest']}}</td>
+           <td>{{a['gpa']}}</td>
+         </tr>
+       </tbody>
+    </table>
+   </div>
 </div>
 
 </div>

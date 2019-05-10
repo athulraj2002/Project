@@ -94,17 +94,11 @@ export class PredictedComponent implements OnInit {
     let projSrchData=this.forGroupSearch.value;
     this.authservice.projectGroupByGPA(Number(projSrchData.GPAForSearch),projSrchData.intrestForSearch,projSrchData.EXpertiseForSearch);
   }
-  check(){
-    if(this.resultByExpertise=='ok' || this.resultByExpertise=='null')
-    return 'wait';
-    else if(this.resultByExpertise=="[]")
-    return 'nodata';
-    else{
-      this.GroupList=this.authservice.res;
-      return 'done';
-    }
-
+  getList(){
+    return this.authservice.res;
   }
+
+
 
 
 }

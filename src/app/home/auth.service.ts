@@ -255,6 +255,8 @@ res:any[]=[];
                           this.res.push(data);
                     }
                   }
+                  if(this.res.length==0) this.lsitOfstudents.next('null');
+                  else
                   this.lsitOfstudents.next(JSON.stringify(this.res));
                 }
 
