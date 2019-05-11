@@ -14,6 +14,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn import tree
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import StandardScaler
+#import matplotlib.pyplot as plt
+import pickle
+from sklearn.externals import joblib
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'upload'
@@ -232,94 +237,13 @@ class PredictType(Resource):
     return jsonify({'text':str(x[0])})
 
 class Analysis(Resource):
- def get(self,unino):
-	#This is the excel file which contains data about Compiler design course
-	series1 = pd.read_excel('CD_2017-18.xlsm',na_values=['NaN'],usecols=[0,1,2,19,20,21],skiprows=[0,1,2,3,4,5,6])
-	co_max_marks = pd.read_excel('CD_2017-18.xlsm',usecols=[19,20,21],skiprows=[x for x in range(0,6)])
+    def get(self,unino):
+    	#This is the excel file which contains data about Compiler design course
+    	series1 = pd.read_excel('CD_2017-18.xlsm',na_values=['NaN'],usecols=[0,1,2,19,20,21],skiprows=[0,1,2,3,4,5,6])
+    	co_max_marks = pd.read_excel('CD_2017-18.xlsm',usecols=[19,20,21],skiprows=[x for x in range(0,6)])
 
-	co_marks=(co_max_marks.iloc[0])
-	max_marks=[]
-
-	# co_marks=co_max_marks[0]
-	for m_marks in co_marks:
-	    max_marks.append(m_marks)
-	print(max_marks)
-
-	#add column names to the dataframe
-	series1.columns=['roll_no','university_roll_no','name','co1','co2','co3']
-
-	#add new column total_marks
-	series1['total_marks']=series1['co1']+series1['co2']+series1['co3']
-
-	#sort the dataframe based on total_marks in descending order
-	series1 = series1.sort_values('total_marks',ascending=False)
-
-	#drop rows having missing values
-	series1.dropna(subset=['roll_no','name'], inplace=True)
-
-	#recreate and intialie the index to new ones
-	series1.index=[x for x in range(1,len(series1.index)+1)]
-
-	#Analysis about a particular student
-	university_roll_no = unino #get from app
-	series = series1['university_roll_no'] #create a new dataseries
-	df=series1[series==university_roll_no] # create a new dataframe
-
-
-	# print(series1.info())
-	# print(series1.describe())
-	# print(series1)
-
-	analy=""
-	max_mark = series1.loc[series1.index[0],'total_marks']
-
-	analy=analy+('You secured <strong>' + str(int(df['total_marks'])) + '/40 </strong> and your rank is <b>' + str(df.index[0]) + '</b> in your class.' )+'<br>'
-
-	analy=analy+('The maximum mark scored in your class is ' + str(max_mark))+'<br>'
-
-	analy=analy+('The question paper contained the following course outcomes: ' + str([str.upper(series1.columns[co]) for co in range(3,len(series1.columns)-1)]))+'<br>'
-
-	co1_mark=int(df.loc[df.index[0],'co1'])
-	co2_mark=int(df.loc[df.index[0],'co2'])
-	co3_mark=int(df.loc[df.index[0],'co3'])
-	co1_percentage = int((co1_mark/max_marks[0])*100)
-	co2_percentage = int((co2_mark/max_marks[1])*100)
-	co3_percentage = int((co3_mark/max_marks[2])*100)
-
-	co_percentage = [co1_percentage, co2_percentage, co3_percentage]
-	# print(co1_percentage,co2_percentage,co3_percentage)
-
-	for index,co_percent in enumerate(co_percentage):
-	    if(co_percent<=45):
-		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ' <i>which is less than the average performance</i>. So, Please refer the following topics : blah blah blah to improve your score')+'<br>'
-	    elif(co_percent>=75):
-		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + '. Awesome, Keep up the good work and you will reach greater heights. With great knowledge comes great responsibility.')+'<br>'
-	    else:
-		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ', you did good to get an overview about the topic but you need to improve a lot.')+'<br>'
-
-
-	#print(analy)
-	return jsonify({'analy':analy})
-
-
-class GetFiles(Resource):
-    def get(self,batch,sem,series):
-        if not (os.path.isdir('upload/'+batch+'/'+sem+'/'+series)):
-            return 'no_files'
-        elif(len(os.listdir('upload/'+batch+'/'+sem+'/'+series) ) == 0):
-            return 'no_files'
-        else:
-            return os.listdir('upload/'+batch+'/'+sem+'/'+series)
-
-
-class Analysis2(Resource):
-    def get(self,unino,docname):
-        series1 = pd.read_excel(docname,na_values=['NaN'],usecols=[0,1,2,19,20,21],skiprows=[0,1,2,3,4,5,6])
-        sub_name_data_set=pd.read_excel(docname,skiprows=[0])
-        sub_name=sub_name_data_set.iloc[0,2]
-        co_max_marks = pd.read_excel(docname,usecols=[19,20,21],skiprows=[x for x in range(0,6)])
-        co_marks=(co_max_marks.iloc[0])
-        max_marks=[]
+    	co_marks=(co_max_marks.iloc[0])
+    	max_marks=[]
 
     	# co_marks=co_max_marks[0]
     	for m_marks in co_marks:
@@ -372,66 +296,102 @@ class Analysis2(Resource):
 
     	for index,co_percent in enumerate(co_percentage):
     	    if(co_percent<=45):
-    		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ' <i>which is less than the average performance</i>. So, Please refer the following topics : blah blah blah to improve your score')+'<br>'
+    		          analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ' <i>which is less than the average performance</i>. So, Please refer the following topics : blah blah blah to improve your score')+'<br>'
     	    elif(co_percent>=75):
-    		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + '. Awesome, Keep up the good work and you will reach greater heights. With great knowledge comes great responsibility.')+'<br>'
+    		          analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + '. Awesome, Keep up the good work and you will reach greater heights. With great knowledge comes great responsibility.')+'<br>'
     	    else:
-    		analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ', you did good to get an overview about the topic but you need to improve a lot.')+'<br>'
+    		          analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ', you did good to get an overview about the topic but you need to improve a lot.')+'<br>'
 
 
     	#print(analy)
-    	return jsonify({'analy':analy,'subname':sub_name})
+    	return jsonify({'analy':analy})
 
-def elective_pred(marks,elective1,elective2,course_code1,course_code2):
-    soft_computing = pd.read_csv('electivePredict/soft_computing_data.csv')
-    soft_computing.dropna(subset=['CS361'], inplace=True)
 
-    X = soft_computing.iloc[:, 1:7].values
-    y = soft_computing.iloc[:, -1].values
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+class GetFiles(Resource):
+    def get(self,batch,sem,series):
+        if not (os.path.isdir('upload/'+batch+'/'+sem+'/'+series)):
+            return 'no_files'
+        elif(len(os.listdir('upload/'+batch+'/'+sem+'/'+series) ) == 0):
+            return 'no_files'
+        else:
+            return os.listdir('upload/'+batch+'/'+sem+'/'+series)
 
-    from sklearn.ensemble import RandomForestClassifier
 
-    #Create a Gaussian Classifier
-    clf=RandomForestClassifier(n_estimators=100)
+class Analysis2(Resource):
+    def get(self,unino,docname):
+        series1 = pd.read_excel(docname,na_values=['NaN'],usecols=[0,1,2,19,20,21],skiprows=[0,1,2,3,4,5,6])
+        sub_name_data_set=pd.read_excel(docname,skiprows=[0])
+        sub_name=sub_name_data_set.iloc[0,2]
+        co_max_marks = pd.read_excel(docname,usecols=[19,20,21],skiprows=[x for x in range(0,6)])
+        co_marks=(co_max_marks.iloc[0])
+        max_marks=[]
 
-    #Train the model using the training sets y_pred=clf.predict(X_test)
-    clf.fit(X_train,y_train)
+    	# co_marks=co_max_marks[0]
+        for m_marks in co_marks:
+    	       max_marks.append(m_marks)
+        print(max_marks)
 
-    y_pred=clf.predict(X_test)
-    res1=clf.predict([marks])
+    	#add column names to the dataframe
+        series1.columns=['roll_no','university_roll_no','name','co1','co2','co3']
 
-    #Import scikit-learn metrics module for accuracy calculation
-    from sklearn import metrics
-    # Model Accuracy, how often is the classifier correct?
-    print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+        #add new column total_marks
+        series1['total_marks']=series1['co1']+series1['co2']+series1['co3']
 
-    optimisation_techniques = pd.read_csv('electivePredict/optimisation_data.csv')
-    optimisation_techniques.dropna(subset=['CS365'], inplace=True)
+        #sort the dataframe based on total_marks in descending order
+        series1 = series1.sort_values('total_marks',ascending=False)
 
-    X = optimisation_techniques.iloc[:, 1:7].values
-    y = optimisation_techniques.iloc[:, -1].values
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.15, random_state=42)
+        #drop rows having missing values
+        series1.dropna(subset=['roll_no','name'], inplace=True)
 
-    from sklearn.ensemble import RandomForestClassifier
+        #recreate and intialie the index to new ones
+        series1.index=[x for x in range(1,len(series1.index)+1)]
 
-    #Create a Gaussian Classifier
-    clf=RandomForestClassifier(n_estimators=100)
+        #Analysis about a particular student
+        university_roll_no = unino #get from app
+        series = series1['university_roll_no'] #create a new dataseries
+        df=series1[series==university_roll_no] # create a new dataframe
 
-    #Train the model using the training sets y_pred=clf.predict(X_test)
-    clf.fit(X_train,y_train)
 
-    y_pred=clf.predict(X_test)
+        # print(series1.info())
+        # print(series1.describe())
+        # print(series1)
 
-    print(X_test)
-    res2=clf.predict([marks])
-    print(y_pred)
-    print(y_test)
+        analy=""
+        max_mark = series1.loc[series1.index[0],'total_marks']
 
-    #Import scikit-learn metrics module for accuracy calculation
-    from sklearn import metrics
-    # Model Accuracy, how often is the classifier correct?
-    print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+        analy=analy+('You secured <strong>' + str(int(df['total_marks'])) + '/40 </strong> and your rank is <b>' + str(df.index[0]) + '</b> in your class.' )+'<br>'
+
+        analy=analy+('The maximum mark scored in your class is ' + str(max_mark))+'<br>'
+
+        analy=analy+('The question paper contained the following course outcomes: ' + str([str.upper(series1.columns[co]) for co in range(3,len(series1.columns)-1)]))+'<br>'
+
+        co1_mark=int(df.loc[df.index[0],'co1'])
+        co2_mark=int(df.loc[df.index[0],'co2'])
+        co3_mark=int(df.loc[df.index[0],'co3'])
+        co1_percentage = int((co1_mark/max_marks[0])*100)
+        co2_percentage = int((co2_mark/max_marks[1])*100)
+        co3_percentage = int((co3_mark/max_marks[2])*100)
+
+        co_percentage = [co1_percentage, co2_percentage, co3_percentage]
+        # print(co1_percentage,co2_percentage,co3_percentage)
+
+        for index,co_percent in enumerate(co_percentage):
+            if(co_percent<=45):
+                analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ' <i>which is less than the average performance</i>. So, Please refer the following topics : blah blah blah to improve your score')+'<br>'
+            elif(co_percent>=75):
+                analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + '. Awesome, Keep up the good work and you will reach greater heights. With great knowledge comes great responsibility.')+'<br>'
+            else:
+                analy=analy+('You scored '+ str(co_percent) + '% from CO' + str(index+1) + ', you did good to get an overview about the topic but you need to improve a lot.')+'<br>'
+
+
+        #print(analy)
+        return jsonify({'analy':analy,'subname':sub_name})
+
+def elective_pred1(marks):
+    soft_computing_model = joblib.load('electivePredict/soft_computing.pkl')
+
+    # Use the loaded model to make predictions
+    res = soft_computing_model.predict([marks])
 
     grade={
         10:'O',
@@ -445,16 +405,27 @@ def elective_pred(marks,elective1,elective2,course_code1,course_code2):
         2:'F',
         1:'F'
     }
+    return grade[res[0]]
 
-    recommendation=[]
-    if(res1>res2):
-        recommendation.append(str(course_code1)+'-'+str(elective1)+' : '+str(grade[res1[0]]))
-        recommendation.append(str(course_code2)+'-'+str(elective2)+' : '+str(grade[res2[0]]))
-    elif(res1<res2):
-        recommendation.append(str(course_code2)+'-'+str(elective2)+' : '+str(grade[res2[0]]))
-        recommendation.append(str(course_code1)+'-'+str(elective1)+' : '+str(grade[res1[0]]))
+def elective_pred2(marks):
+    optimisation_techniques_model= joblib.load('electivePredict/optimisation_techniques.pkl')
 
-    return recommendation
+    # Use the loaded model to make predictions
+    res = optimisation_techniques_model.predict([marks])
+
+    grade={
+        10:'O',
+        9:'A+',
+        8:'A',
+        7:'B+',
+        6:'B',
+        5:'C',
+        4:'P',
+        3:'P',
+        2:'F',
+        1:'F'
+    }
+    return grade[res[0]]
 
 class ElectivePredict(Resource):
     def get(self,g1,g2,g3,g4,g5,g6):
@@ -471,11 +442,25 @@ class ElectivePredict(Resource):
             'Absent':1
         }
 
+
+
         grades=[g1,g2,g3,g4,g5,g6]
         marks=[]
         for grade in grades:
             marks.append(grade_to_mark[grade])
-        return elective_pred(marks,'Soft Computing','Optimisation Techniques','CS361','CS365')
+        res1=elective_pred1(marks)
+        res2=elective_pred2(marks)
+
+        recommendation=[]
+        if(res1<res2):
+        	recommendation.append('CS631 Soft Computing : '+str(res1))
+        	recommendation.append('CS365 Optimization Techniques : '+str(res2))
+        elif(res1>res2):
+        	recommendation.append('CS365 Optimization Techniques : '+str(res2))
+	        recommendation.append('CS631 Soft Computing : '+str(res1))
+
+        return recommendation
+
 
 
 api.add_resource(TestPath, '/test') # Route_1
