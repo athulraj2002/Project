@@ -40,6 +40,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { FacSignupComponent } from './fac-signup/fac-signup.component';
 import { RecordsComponent } from './faculty/records/records.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { RecordsComponent } from './faculty/records/records.component';
     PredictedComponent,
     FacSignupComponent,
     RecordsComponent,
+    AdminComponent,
 
   ],
   imports: [
