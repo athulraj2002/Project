@@ -48,37 +48,54 @@
         </button>
         <h4 class="modal-title w-100" id="myModalLabel">Upload Files</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive">
             <form #form class=""  [formGroup]="fileupload" enctype="multipart/form-data">
-              <mat-form-field >
-                <mat-label>Semester</mat-label>
-                <mat-select formControlName="sem">
-                  <mat-option *ngFor="let sem of Semester" [value]="sem.value" >
-                    {{sem.value}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field><br>
+              <table>
+                <tbody>
 
-              <mat-form-field >
-                <mat-label>Series</mat-label>
-                <mat-select formControlName="series">
-                  <mat-option *ngFor="let ser of Ser" [value]="ser.value" >
-                    {{ser.value}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field><br>
 
-              <mat-form-field >
-                  <mat-label>Batch</mat-label>
-                  <mat-select formControlName="batch">
-                    <mat-option *ngFor="let batch of Batches" [value]="batch.value">
-                      {{batch.value}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <br>
+                <tr>
+                  <td>
+                    <mat-form-field >
+                      <mat-label>Semester</mat-label>
+                      <mat-select formControlName="sem">
+                        <mat-option *ngFor="let sem of Semester" [value]="sem.value" >
+                          {{sem.value}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
 
-                    <input type="file" name="file" required formControlName="uplo" (change)="postMethod($event.target.files)">
+                  <td>
+                    <mat-form-field >
+
+                        <input matInput placeholder="Course Name">
+
+                    </mat-form-field></td>
+
+                  <td><mat-form-field >
+                    <mat-label>Series</mat-label>
+                    <mat-select formControlName="series">
+                      <mat-option *ngFor="let ser of Ser" [value]="ser.value" >
+                        {{ser.value}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field></td>
+
+                  <td><mat-form-field >
+                      <mat-label>Batch</mat-label>
+                      <mat-select formControlName="batch">
+                        <mat-option *ngFor="let batch of Batches" [value]="batch.value">
+                          {{batch.value}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+               </tbody>
+              </table>
+
+                    <input class="btn btn-primary" type="file" name="file" required formControlName="uplo" (change)="postMethod($event.target.files)">
               <br>
 
             </form>
