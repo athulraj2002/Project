@@ -71,8 +71,8 @@
       <div class="details">
         <h4 *ngIf="resultRcvd=='null'">No Semester Data</h4>
         <ul class="list-group" *ngIf="resultRcvd=='gotit'">
-          <li class="list-group-item" *ngFor="let item of semList">
-            <span class="sub ">Subject</span> <span class="fac badge badge-primary">Faculty</span> <span class="det badge badge-success" (click)="basicModal.show()"> Details</span> </li>
+          <li class="list-group-item" *ngFor="let item of semList;let i=index">
+            <span class="sub ">{{item[keyList[i]]['c_code']}}</span> <span class="fac badge badge-primary">{{keyList[i]}}</span> <span class="det badge badge-success" (click)="basicModal.show()"> Details</span> </li>
         </ul>
 
       </div>

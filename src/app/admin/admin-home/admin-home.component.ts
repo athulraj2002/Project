@@ -24,6 +24,7 @@ export class AdminHomeComponent implements OnInit {
       {value: 's8'},
 
     ];
+    keyList:any[]=[];
 
   constructor(private _formBuilder:FormBuilder,private authService:AuthService) { }
 
@@ -35,7 +36,16 @@ export class AdminHomeComponent implements OnInit {
   }
 
   getSemSubjects(sem:string){
+    this.keyList=[];
     this.semSubjects=this.authService.fetchSemSubjects(sem);
-    if(this.resultRcvd=='gotit') this.semList=this.authService.getSemList();
+    if(this.resultRcvd=='gotit') {
+      this.semList=this.authService.getSemList();
+      for(let k of this.semList){
+        this.keyList.push(Object.keys(k));
+      }
+    }
+    console.log(this.keyList);
   }
+
+
 }
