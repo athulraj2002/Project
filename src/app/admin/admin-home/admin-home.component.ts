@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDividerModule} from '@angular/material/divider';
+import {FormBuilder, FormGroup, Validators,ReactiveFormsModule,FormsModule} from '@angular/forms';
+import {AuthService} from '../../home/auth.service';
 
 export interface Semester {
   value: string;
@@ -11,11 +13,10 @@ export interface Semester {
   styleUrls: ['./admin-home.component.scss']
 })
 export class AdminHomeComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  resultRcvd;
+  semList;
+  oddOReven:FormGroup;
+  semSubjects:any;
   semester: Semester[] = [
       {value: 's5'},
       {value: 's6'},
@@ -23,4 +24,18 @@ export class AdminHomeComponent implements OnInit {
       {value: 's8'},
 
     ];
+
+  constructor(private _formBuilder:FormBuilder,private authService:AuthService) { }
+
+  ngOnInit() {
+    this.authService.ResultRcvd.subscribe(message=> this.resultRcvd=message);
+    this.oddOReven=this._formBuilder.group({
+      oddOrEven:['odd',Validators.required]
+    })
+  }
+
+  getSemSubjects(sem:string){
+    this.semSubjects=this.authService.fetchSemSubjects(sem);
+    if(this.resultRcvd=='gotit') this.semList=this.authService.getSemList();
+  }
 }
