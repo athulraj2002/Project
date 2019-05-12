@@ -106,7 +106,7 @@ export class ResultViewComponent implements OnInit {
   }
   showAnaly(filename:string){
     let filePut2=this.authService.getUserData();
-    this.http.get('http://127.0.0.1:5002/analysis/'+filePut2['regno']+'/'+filename).subscribe((val) => {
+    this.http.get('http://127.0.0.1:5002/analysis/'+filePut2['regno']+'/'+filePut2['batch']+'/'+filePut2['sem']+'/'+this.forGetFile.value.seriesNum+'/'+filename).subscribe((val) => {
 
       this.fromGetFileData=val;
       //this.authService.updateAnaly2(this.fromGetFileData['analy'],this.forGetFile.value.seriesNum,this.fromGetFileData['subname']);

@@ -189,12 +189,14 @@ def hello():
     return jsonify({'text':'Hello Worldl!'})
 
 class Upload(Resource):
-  def post(self,batch,sem,series):
+  def post(self,batch,sem,series,course_code):
         UPLOAD_FOLDER='upload/'+batch+'/'+sem+'/'+series
         if not os.path.exists(UPLOAD_FOLDER):
             os.makedirs(UPLOAD_FOLDER)
         app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
         f = request.files['file']
+        oldname=f.filename
+        f.filename=course_code+'.xlsm'
         filename = secure_filename(f.filename)
         f.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
       	#return jsonify({'msg':'success'})
@@ -202,7 +204,7 @@ class Upload(Resource):
             series_num=1
         elif(series=='second'):
             series_num=2
-        return get_analysis(filename,series_num)
+        return get_analysis(UPLOAD_FOLDER+'/'+filename,series_num)
 
 
 class TestPath(Resource):
@@ -318,7 +320,9 @@ class GetFiles(Resource):
 
 
 class Analysis2(Resource):
-    def get(self,unino,docname):
+    def get(self,unino,batch,sem,series,docname):
+        #docname = secure_filename(docname)
+        docname='upload/'+batch+'/'+sem+'/'+series+'/'+docname
         series1 = pd.read_excel(docname,na_values=['NaN'],usecols=[0,1,2,19,20,21],skiprows=[0,1,2,3,4,5,6])
         sub_name_data_set=pd.read_excel(docname,skiprows=[0])
         sub_name=sub_name_data_set.iloc[0,2]
@@ -466,8 +470,8 @@ class ElectivePredict(Resource):
 api.add_resource(TestPath, '/test') # Route_1
 api.add_resource(PredictType, '/predict/<int:c1>/<int:c2>/<int:c3>/<int:c4>/<int:c5>/')
 api.add_resource(Analysis, '/analysis/<unino>')
-api.add_resource(Analysis2, '/analysis/<unino>/<docname>')
-api.add_resource(Upload, '/upload/<batch>/<sem>/<series>')
+api.add_resource(Analysis2, '/analysis/<unino>/<batch>/<sem>/<series>/<docname>')
+api.add_resource(Upload, '/upload/<batch>/<sem>/<series>/<course_code>/')
 api.add_resource(GetFiles, '/getfile/<batch>/<sem>/<series>')
 api.add_resource(ElectivePredict,'/elPred/<g1>/<g2>/<g3>/<g4>/<g5>/<g6>/')
 

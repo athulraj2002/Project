@@ -107,6 +107,7 @@ export class FacNavComponent implements OnInit {
       {uplo:['',Validators.required],
        batch:['',Validators.required],
        sem:['',Validators.required],
+       coursecode:['',Validators.required],
        series:['',Validators.required]
     });
   }
@@ -131,7 +132,7 @@ export class FacNavComponent implements OnInit {
   };*/
   let options=this.fileupload.value;
   this.upMsg="";
-    this.http.post('http://127.0.0.1:5002/upload/'+options.batch+'/'+options.sem+'/'+options.series, this.formData).subscribe((val) => {
+    this.http.post('http://127.0.0.1:5002/upload/'+options.batch+'/'+options.sem+'/'+options.series+'/'+options.coursecode+'/', this.formData).subscribe((val) => {
 
       console.log(val);
       this.authservice.filedata(val);
