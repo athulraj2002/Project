@@ -11,6 +11,8 @@ export class AuthService{
   test: string;
   userData:JSON;
   gradeData:any;
+  private gotResult = new BehaviorSubject('ok');
+  ResultRcvd=this.gotResult.asObservable();
   private gpaStudent = new BehaviorSubject('ok');
   GpaofStudent=this.gpaStudent.asObservable();
   private errorDatalogin = new BehaviorSubject('ok');
@@ -322,6 +324,46 @@ res:any[]=[];
       this.refreshAll();
 
   }
+  fetchedSemData:any;
+  fetchedSemDataArray:any[]=[];
+  fetchSemSubjects(sem:string){
+    this.userProfileRef.orderByChild('usertype').equalTo('faculty').on('value', dataSnapshot => {
+
+      this.fetchedSemData = dataSnapshot.val();
+      //console.log(this.fetchedSemData);
+      let keys=Object.keys(this.fetchedSemData);
+      //console.log(keys);
+      for(let a of keys){
+        this.fetchedSemDataArray=[];
+        if(this.fetchedSemData[a]['facultyData']){
+          let interdata=this.fetchedSemData[a]['facultyData'];
+          let course = Object.keys(interdata);
+          //console.log(course);
+          for(let b of course){
+            if(b.includes(sem)&&interdata[b]['status']=='active'){
+                    let toPush={[this.fetchedSemData[a]['name']]:interdata[b]};
+                    this.fetchedSemDataArray.push(toPush);
+
+            }
+          }
+        }
+
+      }
+        if(this.fetchedSemDataArray.length >0){
+            this.gotResult.next('gotit');
+            console.log(this.fetchedSemDataArray);
+        }
+        else{
+          this.gotResult.next('null');
+        }
+
+    });
+  }
+
+  getSemList(){
+    return this.fetchedSemDataArray;
+  }
+
 
 
 }

@@ -5,6 +5,14 @@
       <h2>Welcome HOD</h2>
       <hr>
     </div>
+    <div>
+      <form [formGroup]="oddOReven">
+        <mat-radio-group id="genderad" formControlName="oddOrEven" >
+          <mat-radio-button value="odd" >Odd Semester</mat-radio-button>
+          <mat-radio-button value="even" >Even Semester</mat-radio-button>
+        </mat-radio-group><br>
+      </form>
+    </div>
     <div class="container">
       <h3 style="padding:20px 0px;">Pass Percentages</h3>
 
@@ -37,33 +45,34 @@
 
       <div class="row">
         <div class="col-md 4" style="padding:30px;">
-          <mat-card style="padding:50px;">R2</mat-card>
+          <mat-card style="padding:50px;" *ngIf="oddOReven.value.oddOrEven=='odd'" (click)="getSemSubjects('s1')">S1</mat-card>
+          <mat-card style="padding:50px;" *ngIf="oddOReven.value.oddOrEven=='even'" (click)="getSemSubjects('s2')">S2</mat-card>
 
 
         </div>
         <div class="col-md 4" style="padding:30px;">
-          <mat-card style="padding:50px;">R4</mat-card>
+          <mat-card style="padding:50px;" *ngIf="oddOReven.value.oddOrEven=='odd'" (click)="getSemSubjects('s3')">S3</mat-card>
+          <mat-card style="padding:50px;" *ngIf="oddOReven.value.oddOrEven=='even'" (click)="getSemSubjects('s4')">S4</mat-card>
 
         </div>
         <div class="col-md 4"style="padding:30px;">
-          <mat-card style="padding:50px;">R6</mat-card>
+          <mat-card style="padding:50px;" *ngIf="oddOReven.value.oddOrEven=='odd'" (click)="getSemSubjects('s5')">S5</mat-card>
+          <mat-card style="padding:50px;" *ngIf="oddOReven.value.oddOrEven=='even'" (click)="getSemSubjects('s6')">S6</mat-card>
 
         </div>
         <div class="col-md 4"style="padding:30px;">
-          <mat-card style="padding:50px;">R8</mat-card>
+          <mat-card style="padding:50px;" *ngIf="oddOReven.value.oddOrEven=='odd'" (click)="getSemSubjects('s7')">S7</mat-card>
+          <mat-card style="padding:50px;" *ngIf="oddOReven.value.oddOrEven=='even'" (click)="getSemSubjects('s8')">S8</mat-card>
 
         </div>
 
 
       </div>
       <div class="details">
-        <ul class="list-group" >
-          <li class="list-group-item"><span class="sub ">Subject</span> <span class="fac badge badge-primary">Faculty</span> <span class="det badge badge-success" (click)="basicModal.show()"> Details</span> </li>
-          <li class="list-group-item"><span class="sub ">Subject</span> <span class="fac badge badge-primary">Faculty</span> <span class="det badge badge-success"> Details</span> </li>
-          <li class="list-group-item"><span class="sub ">Subject</span> <span class="fac badge badge-primary">Faculty</span> <span class="det badge badge-success"> Details</span> </li>
-          <li class="list-group-item"><span class="sub ">Subject</span> <span class="fac badge badge-primary">Faculty</span> <span class="det badge badge-success"> Details</span> </li>
-          <li class="list-group-item"><span class="sub ">Subject</span> <span class="fac badge badge-primary">Faculty</span> <span class="det badge badge-success"> Details</span> </li>
-          <li class="list-group-item"><span class="sub ">Subject</span> <span class="fac badge badge-primary">Faculty</span> <span class="det badge badge-success"> Details</span> </li>
+        <h4 *ngIf="resultRcvd=='null'">No Semester Data</h4>
+        <ul class="list-group" *ngIf="resultRcvd=='gotit'">
+          <li class="list-group-item" *ngFor="let item of semList;let i=index">
+            <span class="sub ">{{item[keyList[i]]['c_code']}}</span> <span class="fac badge badge-primary">{{keyList[i]}}</span> <span class="det badge badge-success" (click)="basicModal.show()"> Details</span> </li>
         </ul>
 
       </div>
