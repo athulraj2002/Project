@@ -21,6 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsComponent } from './dashboard/forms/forms.component';
 import { ResultViewComponent } from './dashboard/result-view/result-view.component';
 import { DashNavComponent } from './dashboard/dash-nav/dash-nav.component';
+import {MatDividerModule} from '@angular/material/divider';
 import { HomeComponent } from './home/home.component';
 import { TaketestComponent } from './dashboard/taketest/taketest.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,6 +42,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { FacSignupComponent } from './fac-signup/fac-signup.component';
 import { RecordsComponent } from './faculty/records/records.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminNavComponent } from './admin/admin-nav/admin-nav.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+
+import { AdminFacComponent } from './admin/admin-fac/admin-fac.component';
+import { AdminResultComponent } from './admin/admin-result/admin-result.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +69,11 @@ import { AdminComponent } from './admin/admin.component';
     FacSignupComponent,
     RecordsComponent,
     AdminComponent,
+    AdminNavComponent,
+    AdminHomeComponent,
+
+    AdminFacComponent,
+    AdminResultComponent,
 
   ],
   imports: [
@@ -87,7 +98,8 @@ import { AdminComponent } from './admin/admin.component';
         HttpClientModule,
         MatSelectModule,
         NgxUiLoaderModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatDividerModule,
   ],
   providers: [AuthService,AuthGuard,DataFetchService,AuthGuard2],
   bootstrap: [AppComponent],

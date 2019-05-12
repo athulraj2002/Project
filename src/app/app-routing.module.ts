@@ -13,6 +13,11 @@ import {FacultyComponent} from './faculty/faculty.component';
 import {FacHomeComponent} from './faculty/fac-home/fac-home.component';
 import {RecordsComponent} from './faculty/records/records.component';
 import {FacSignupComponent} from './fac-signup/fac-signup.component';
+import {AdminComponent} from './admin/admin.component';
+import {AdminHomeComponent} from './admin/admin-home/admin-home.component';
+import {AdminFacComponent} from './admin/admin-fac/admin-fac.component';
+import {AdminResultComponent} from './admin/admin-result/admin-result.component';
+
 
 
 const routes: Routes = [
@@ -20,6 +25,14 @@ const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'home', component:HomeComponent},
   {path:'facSignup',component:FacSignupComponent},
+  {path:'admin',component:AdminComponent,children:[
+      {path:'',redirectTo:'admin-home',pathMatch:'full'},
+      {path:'admin-home' , component:AdminHomeComponent},
+      {path:'admin-fac',component:AdminFacComponent},
+      {path:'admin-result',component:AdminResultComponent}
+
+
+  ]},
   {path: 'faculty',component:FacultyComponent, children:[
     {path:'',redirectTo:'fac-home',pathMatch:'full'},
     {path:'fac-home',component:FacHomeComponent,canActivate:[AuthGuard2]},
