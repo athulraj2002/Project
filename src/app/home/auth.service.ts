@@ -55,12 +55,14 @@ export class AuthService{
       );
   }
 
-  signupUserFaculty(name: string,facid:string,email: string, password: string ): Promise<any> {
+  signupUserFaculty(name: string,facid:string,desig:string,email: string, password: string ): Promise<any> {
     return this.fireAuth.createUserWithEmailAndPassword(email, password).then( newUser => {
       this.userProfileRef.child(this.fireAuth.currentUser.uid).set({
         name: name,
         facid:facid,
         email:email,
+        designation:desig,
+        facultyData:"",
         usertype:'faculty'
       });
       this.errorData.next('success');
@@ -82,13 +84,14 @@ export class AuthService{
           this.userProfileRef.child(this.fireAuth.currentUser.uid).on('value', dataSnapshot => {
 
             this.userData = dataSnapshot.val();
+            if (this.userData['regno']){
             this.gpaRef.child(this.userData['regno']).on('value', dataSnapshot3 => {
 
               this.gpaStudent.next(dataSnapshot3.val());
 
 
 
-    });
+    });}
 
 
   });
@@ -289,6 +292,35 @@ res:any[]=[];
   }
   getGPAofStudent(){
     return this.GpaofStudent;
+  }
+  courseDetailsAddFirebase(batch:string,sem:string,ccode:string,cname:string){
+
+    this.userProfileRef.child(this.fireAuth.currentUser.uid).child('facultyData').update(
+      {
+        [batch+'_'+sem+'_'+ccode]:{
+          batch:batch,
+          sem:sem,
+          c_code:ccode,
+          c_name:cname,
+          status:'active'
+        }
+      },function(error){
+        if(error) console.log(error);
+        else console.log('success course details');
+      });
+      this.refreshAll();
+
+  }
+  updateCourseStatus(key:string,statusValue:string){
+    this.userProfileRef.child(this.fireAuth.currentUser.uid).child('facultyData/'+key).update(
+      {
+        status:statusValue
+      },function(error){
+        if(error) console.log(error);
+        else console.log('success status details');
+      });
+      this.refreshAll();
+
   }
 
 

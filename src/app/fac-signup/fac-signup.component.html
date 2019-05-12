@@ -16,7 +16,14 @@
               <input matInput placeholder="Enter your email" formControlName="facemail" required>
 
             </mat-form-field><br>
-
+            <mat-form-field>
+                <mat-label>Designation</mat-label>
+                <mat-select formControlName="designation">
+                  <mat-option *ngFor="let desig of designations" [value]="desig.value">
+                    {{desig.value}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field><br>
             <mat-form-field>
              <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" formControlName="facpaswd">
              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
