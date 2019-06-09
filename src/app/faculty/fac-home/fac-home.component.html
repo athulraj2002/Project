@@ -15,7 +15,7 @@
   <div class="container table-responsive">
     <form [formGroup]="CourseDetails">
       <table class="table table-striped" style="border-radius:5px;">
-        <thead>
+        <thead class="clrwht">
           <th>Batch</th>
           <th>Semester</th>
           <th>Course Code</th>
@@ -23,7 +23,7 @@
           <th>Status</th>
         </thead>
         <tbody >
-          <tr *ngFor="let rec of courseDataFetchedKeys; let i = index">
+          <tr *ngFor="let rec of courseDataFetchedKeys; let i = index" class="clrwht">
             <td>{{courseDataFetched[rec]['batch']}}</td>
             <td>{{courseDataFetched[rec]['sem']}}</td>
             <td>{{courseDataFetched[rec]['c_code']}}</td>
@@ -142,6 +142,10 @@
        </tbody>
       </table>
     </div>
+<br>
+  <button type="button" name="button" class="btn btn-success" (click)="saveAnalysis()" *ngIf="message['least_five']">Save Analysis</button>
+
+
 
   </div>
 

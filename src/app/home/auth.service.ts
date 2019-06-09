@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class AuthService{
 
+  AnalyKey:string;
   token: string;
   test: string;
   userData:JSON;
@@ -210,9 +211,10 @@ export class AuthService{
    });
  }
 
-
+FileData:any;
  filedata(data:any){
    this.messageSource.next(data);
+   this.FileData=data;
  }
 
  fetchGrades(unino:string){
@@ -363,7 +365,19 @@ res:any[]=[];
   getSemList(){
     return this.fetchedSemDataArray;
   }
+  saveAnalysisToDB(data:any){
+    this.userProfileRef.child(this.fireAuth.currentUser.uid).child('savedAnalysis').update(
+      {
+        [this.AnalyKey]:this.FileData
+      },function(error){
+        if(error) console.log(error);
+        else console.log('success Analysis save');
+      });
+  }
 
+  updateKeyForAnalysis(keyVal:string){
+        this.AnalyKey=keyVal;
+  }
 
 
 }

@@ -131,6 +131,7 @@ export class FacNavComponent implements OnInit {
     })
   };*/
   let options=this.fileupload.value;
+  this.authservice.updateKeyForAnalysis(options.batch+'_'+options.sem+'_'+options.series+'_'+options.coursecode);
   this.upMsg="";
     this.http.post('http://127.0.0.1:5002/upload/'+options.batch+'/'+options.sem+'/'+options.series+'/'+options.coursecode+'/', this.formData).subscribe((val) => {
 

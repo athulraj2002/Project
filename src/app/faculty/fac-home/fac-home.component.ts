@@ -138,5 +138,8 @@ export class FacHomeComponent implements OnInit {
     this.courseDataFetched=this.facDATA['facultyData'];
     this.courseDataFetchedKeys=Object.keys(this.courseDataFetched);
   }
+  saveAnalysis(){
+    this.authservice.saveAnalysisToDB(this.message);
+  }
 
 }
