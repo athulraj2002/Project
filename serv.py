@@ -477,4 +477,4 @@ api.add_resource(ElectivePredict,'/elPred/<g1>/<g2>/<g3>/<g4>/<g5>/<g6>/')
 
 
 if __name__ == '__main__':
-   app.run(port=5002)
+   app.run(port=5002,threaded=True)
