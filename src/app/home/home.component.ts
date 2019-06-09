@@ -13,6 +13,7 @@ import { NgxUiLoaderService,NgxUiLoaderModule } from 'ngx-ui-loader';
 })
 export class HomeComponent implements OnInit {
 
+  hide = true;
   signupform : FormGroup;
   loginform : FormGroup;
   serverData: JSON;
@@ -62,6 +63,20 @@ export class HomeComponent implements OnInit {
     this.authService.signinUser(this.loginform.value.emailLogin,this.loginform.value.passwdLogin);
     this.ngxLoader.stop();
   }
+
+    /*swiper = new Swiper('.blog-slider', {
+    spaceBetween: 30,
+    effect: 'fade',
+    loop: true,
+    mousewheel: {
+        invert: false,
+    },
+    pagination: {
+        el: '.blog-slider__pagination',
+        clickable: true,
+    }
+});
+
   /*sayHi() {
     this.httpClient.get('http://127.0.0.1:5002/test').subscribe(data => {
       this.serverData = data as JSON;
